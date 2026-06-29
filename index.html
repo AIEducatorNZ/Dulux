@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Market Your Painting Business — Dulux Accredited Painter Workshop</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --dulux-navy:   #1B2A4A;
+    --dulux-red:    #C8102E;
+    --dulux-sky:    #00A9CE;
+    --dulux-sky-lt: #E6F6FB;
+    --aivolve-teal: #00C2A0;
+    --white:        #FFFFFF;
+    --off-white:    #F7F8FA;
+    --text-dark:    #111827;
+    --text-mid:     #374151;
+    --text-light:   #6B7280;
+    --slide-w: 1100px;
+    --slide-h: 620px;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: #0D1117;
+    color: var(--text-dark);
+    overflow: hidden;
+  }
+
+  /* ── LAYOUT ── */
+  #app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  /* ── TOP BAR ── */
+  #topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--dulux-navy);
+    padding: 0 20px;
+    height: 44px;
+    flex-shrink: 0;
+    gap: 12px;
+  }
+  #topbar .toc-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  #topbar .toc-btn:hover { background: rgba(255,255,255,0.1); }
+  #slide-counter {
+    color: rgba(255,255,255,0.55);
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  #topbar .brand-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    justify-content: center;
+  }
+  .brand-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255,255,255,0.25);
+  }
+  .brand-label {
+    color: rgba(255,255,255,0.7);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .brand-aivolve {
+    color: var(--aivolve-teal);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .06em;
+  }
+
+  /* ── MAIN AREA ── */
+  #main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 16px 16px 0;
+    gap: 12px;
+  }
+
+  /* ── SLIDE VIEWPORT ── */
+  #slide-viewport {
+    width: 100%;
+    max-width: var(--slide-w);
+    flex: 1;
+    position: relative;
+    min-height: 0;
+  }
+  #slide-viewport iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.5);
+  }
+
+  /* ── NOTES PANEL ── */
+  #notes-panel {
+    width: 100%;
+    max-width: var(--slide-w);
+    background: #1A1F2B;
+    border-radius: 8px;
+    padding: 14px 20px;
+    overflow-y: auto;
+    height: 180px;
+    flex-shrink: 0;
+    display: none;
+  }
+  #notes-panel.visible {
+    display: block;
+  }
+  #notes-panel .notes-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--aivolve-teal);
+    margin-bottom: 8px;
+  }
+  #notes-content {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ── NOTES TOGGLE BUTTON ── */
+  #notes-toggle-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .15s;
+  }
+  #notes-toggle-btn:hover { background: rgba(255,255,255,0.1); }
+  #notes-toggle-btn.active {
+    background: var(--aivolve-teal);
+    border-color: var(--aivolve-teal);
+    color: #fff;
+  }
+
+  /* ── BOTTOM NAV ── */
+  #bottomnav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 10px 0 12px;
+    flex-shrink: 0;
+  }
+  .nav-btn {
+    background: #1A1F2B;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .nav-btn:hover { background: #252C3A; }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .nav-btn.primary {
+    background: var(--dulux-red);
+    border-color: var(--dulux-red);
+  }
+  .nav-btn.primary:hover { background: #a80e26; }
+
+  /* ── TOC OVERLAY ── */
+  #toc-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+  }
+  #toc-overlay.open { display: flex; }
+  #toc-box {
+    background: #1A1F2B;
+    border-radius: 12px;
+    padding: 28px 32px;
+    width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.6);
+  }
+  #toc-box h2 {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: .03em;
+  }
+  .toc-section {
+    margin-bottom: 18px;
+  }
+  .toc-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--dulux-sky);
+    margin-bottom: 6px;
+  }
+  .toc-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.75);
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    padding: 5px 0 5px 12px;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: color .12s, border-color .12s;
+  }
+  .toc-item:hover { color: #fff; border-left-color: var(--dulux-red); }
+  .toc-item.active { color: #fff; border-left-color: var(--dulux-red); font-weight: 600; }
+  .toc-close {
+    margin-top: 20px;
+    width: 100%;
+    background: var(--dulux-navy);
+    border: none;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .toc-close:hover { background: #253557; }
+
+  /* ── SLIDE STYLES (inside iframe srcdoc) rendered inline ── */
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- TOP BAR -->
+  <div id="topbar">
+    <button class="toc-btn" onclick="toggleTOC()">&#9776; Contents</button>
+    <div class="brand-bar">
+      <span class="brand-label">Dulux Accredited Painter Workshop</span>
+      <div class="brand-divider"></div>
+      <span class="brand-aivolve">AIvolve</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button id="notes-toggle-btn" onclick="toggleNotes()">&#128203; Speaker Notes</button>
+      <span id="slide-counter">1 / 32</span>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div id="main">
+    <div id="slide-viewport">
+      <iframe id="slide-frame" src="about:blank"></iframe>
+    </div>
+    <div id="notes-panel">
+      <div class="notes-label">Speaker notes</div>
+      <div id="notes-content">Loading...</div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div id="bottomnav">
+    <button class="nav-btn" id="btn-prev" onclick="prevSlide()" disabled>&#8592; Back</button>
+    <button class="nav-btn primary" id="btn-next" onclick="nextSlide()">Next &#8594;</button>
+  </div>
+
+</div>
+
+<!-- TOC OVERLAY -->
+<div id="toc-overlay" onclick="closeTOCOutside(event)">
+  <div id="toc-box">
+    <h2>Workshop contents</h2>
+    <div id="toc-list"></div>
+    <button class="toc-close" onclick="toggleTOC()">Close</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// SLIDE DATA
+// Each slide: { section, title, html, notes }
+// ═══════════════════════════════════════════════════════════
+
+const SLIDES = [
+
+// ── TITLE ──────────────────────────────────────────────────
+{
+  section: "Opening",
+  title: "Title slide",
+  html: `
+<div class="slide dark-navy">
+  <div class="slide-inner" style="justify-content:center;align-items:flex-start;gap:0;">
+    <div style="display:flex;align-items:center;gap:18px;margin-bottom:28px;">
+      <div class="pill red">Dulux Accredited Painter Workshop</div>
+      <div class="pill teal">AIvolve</div>
+    </div>
+    <h1 style="font-size:clamp(28px,4.5vw,52px);font-weight:900;line-height:1.1;color:#fff;max-width:700px;">How to market<br><span style="color:#00A9CE;">your painting<br>business</span></h1>
+    <p style="margin-top:24px;font-size:16px;color:rgba(255,255,255,0.6);max-width:520px;line-height:1.6;">Practical digital marketing and AI strategies you can use from tomorrow. No jargon. No fluff. Just what works for NZ painters right now.</p>
+    <div style="margin-top:36px;display:flex;align-items:center;gap:20px;">
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);">Presented by <strong style="color:#fff;">Patrick Dodd</strong></div>
+      <div style="width:1px;height:16px;background:rgba(255,255,255,0.2);"></div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);">60 minutes</div>
+    </div>
+  </div>
+  <div class="slide-accent-bar"></div>
+</div>`,
+  notes: `Welcome everyone and thanks for coming. Quick housekeeping: the session runs 60 minutes, with 10 minutes for questions at the end. Keep your questions for that slot if you can, or write them down as we go.\n\nIntroduce yourself briefly: teaching fellow at the University of Auckland, co-founder of AIvolve (AI call agents for trades businesses — more on that later). Everything else you'll hear today is independent of that.\n\nTell them what they're getting: a practical session on the things that actually move the needle for a painting business in New Zealand right now. Not theory. Not what works in the US. What works here.`
+},
+
+// ── OPENING: THE LANDSCAPE ──────────────────────────────────
+{
+  section: "Opening",
+  title: "The NZ landscape",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Why this matters now</div>
+    <h2 class="slide-h2">The market is tighter.<br>The opportunity is real.</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:18px;">
+      <div class="stat-card navy">
+        <div class="stat-num" style="color:#00A9CE;">5,832</div>
+        <div class="stat-label">painting businesses in NZ competing for work</div>
+      </div>
+      <div class="stat-card navy">
+        <div class="stat-num" style="color:#C8102E;">40%</div>
+        <div class="stat-label">of NZ businesses promote themselves online. That means 60% don't.</div>
+      </div>
+      <div class="stat-card navy">
+        <div class="stat-num" style="color:#00C2A0;">45%</div>
+        <div class="stat-label">of home services businesses have a verified Google listing. Half your competitors are invisible.</div>
+      </div>
+    </div>
+    <p style="margin-top:24px;font-size:14px;color:#374151;line-height:1.7;max-width:680px;">Construction activity is shrinking. The businesses that stay busy through a quiet market are the ones customers can actually find. The gap between who does this well and who doesn't is still wide open in New Zealand.</p>
+  </div>
+</div>`,
+  notes: `Set the scene here. The construction market has contracted from $63 billion in 2023 to a projected $55.7 billion in 2025. That's real pressure on the painting sector.\n\nThe opportunity: most painters are not doing this yet. Only 40% of NZ businesses promote themselves digitally at all (MBIE Business Digital Capability Monitor, 2024). NZ small businesses rank last among 11 Asia-Pacific economies for technology uptake (CPA Australia survey, 2024-25).\n\nKey point to land: the painters who are doing even a few of these things well are cleaning up. Not because they're special, but because their competition isn't showing up online at all.`
+},
+
+{
+  section: "Opening",
+  title: "What we're covering today",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Today's session</div>
+    <h2 class="slide-h2">Five things that will<br>move your business forward</h2>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:28px;max-width:640px;">
+      <div class="agenda-row"><span class="agenda-num" style="background:var(--dulux-sky);">1</span><div><strong>Your Google front door</strong> — GBP and reviews</div></div>
+      <div class="agenda-row"><span class="agenda-num" style="background:#2563EB;">2</span><div><strong>Proof of work</strong> — photos and organic social</div></div>
+      <div class="agenda-row"><span class="agenda-num" style="background:var(--aivolve-teal);">3</span><div><strong>AI as your admin offsider</strong> — writing, reviews, missed calls</div></div>
+      <div class="agenda-row"><span class="agenda-num" style="background:#7C3AED;">4</span><div><strong>Building your customer base</strong> — email and when to run ads</div></div>
+      <div class="agenda-row"><span class="agenda-num" style="background:#374151;">5</span><div><strong>What's in the guide</strong> — everything else, at your own pace</div></div>
+    </div>
+    <div style="margin-top:28px;background:#EFF6FF;border-left:3px solid var(--dulux-sky);padding:12px 16px;border-radius:4px;font-size:13px;color:#1E40AF;max-width:560px;">
+      After each section we'll open <strong>Daz</strong>, the custom GPT built on the Dulux Marketing Offsider guide — and answer your questions live.
+    </div>
+  </div>
+</div>`,
+  notes: `Walk them through the agenda. Emphasise that we'll be using Daz throughout: Daz is a custom GPT built on the Dulux Marketing Offsider guide — it knows NZ painter marketing specifically. They'll take access home today.\n\nTell them: "If something I say doesn't make sense, or you want to go deeper on a topic, yell out a question. I'll put it straight into the tool and we'll see what comes back."\n\nPace note: aim to finish content by the 50-minute mark. Leave 10 minutes for Q&A.`
+},
+
+{
+  section: "Opening",
+  title: "Introducing Daz",
+  html: `
+<div class="slide dark-navy">
+  <div class="slide-inner" style="justify-content:center;align-items:flex-start;">
+    <div class="eyebrow teal">Your take-home tool</div>
+    <h2 class="slide-h2 white">Meet<br><span style="color:#00A9CE;">Daz</span></h2>
+    <p style="font-size:15px;color:rgba(255,255,255,0.75);line-height:1.7;max-width:560px;margin-top:16px;">A custom AI assistant built specifically for NZ painting businesses. Ask it anything from today's session and it will give you a complete, practical answer — step by step, in plain English.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px;max-width:560px;">
+      <div class="feature-chip">"How do I set up my Google profile?"</div>
+      <div class="feature-chip">"Write a Facebook post for my latest job"</div>
+      <div class="feature-chip">"Help me reply to this bad review"</div>
+      <div class="feature-chip">"Should I run Facebook ads?"</div>
+      <div class="feature-chip">"Write a quote follow-up text"</div>
+      <div class="feature-chip">"What email do I send after a job?"</div>
+    </div>
+    <p style="margin-top:24px;font-size:13px;color:rgba(255,255,255,0.45);">Access details in your resource pack. Free to use, no login required.</p>
+  </div>
+</div>`,
+  notes: `Spend a moment here so people understand the two things they're taking home. The Dulux Marketing Offsider is the written guide — 17 sections covering every aspect of digital marketing for NZ painters. Daz is the custom GPT built on top of it. Instead of reading the guide, they can just ask Daz a question and get the relevant answer directly.\n\nIt is NOT magic. It's a writing assistant that knows NZ painting businesses well. The value is that it saves them time on tasks they'd otherwise avoid doing.\n\nIf someone asks what it costs: Daz is free to access with a ChatGPT account. The Dulux Marketing Offsider guide PDF is also free.\n\nNote for presenter: make sure the Daz tab is open in your browser before the session starts.`
+},
+
+// ── SECTION 1: GOOGLE ──────────────────────────────────────
+{
+  section: "Section 1: Your Google front door",
+  title: "Section intro: GBP",
+  html: `
+<div class="slide section-opener" style="background:var(--dulux-navy);">
+  <div class="section-opener-inner">
+    <div class="section-badge">Section 1</div>
+    <h2 style="font-size:clamp(32px,5vw,56px);font-weight:900;color:#fff;line-height:1.1;">Your Google<br><span style="color:#00A9CE;">front door</span></h2>
+    <p style="font-size:16px;color:rgba(255,255,255,0.65);margin-top:16px;max-width:460px;line-height:1.65;">The single highest-return action available to any NZ painter. And it's free.</p>
+    <div style="margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;">
+      <div class="topic-tag">Google Business Profile</div>
+      <div class="topic-tag">Online reviews</div>
+      <div class="topic-tag">The priority ladder</div>
+    </div>
+  </div>
+  <div class="section-time-badge">12 min</div>
+</div>`,
+  notes: `Transition into Section 1. This is the most important section of the day. If people only do one thing after this workshop, it should be fixing their Google Business Profile.\n\nTiming: aim to spend 12 minutes here including the live Daz demo at the end.`
+},
+
+{
+  section: "Section 1: Your Google front door",
+  title: "What is Google Business Profile",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Google Business Profile</div>
+    <h2 class="slide-h2">When someone searches "painter near me" —<br><span style="color:var(--dulux-sky);">this is what they see</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px;align-items:start;">
+      <div>
+        <p style="font-size:14px;line-height:1.7;color:#374151;">Google Business Profile is the free listing on Google Search and Google Maps. It's the first thing a potential customer sees before they visit your website, before they call you, before they decide if you're worth contacting at all.</p>
+        <p style="font-size:14px;line-height:1.7;color:#374151;margin-top:12px;">A fully optimised profile generates an average of <strong>200 clicks per month</strong>. For most painters, that's the entire source of their online enquiries.</p>
+        <div style="margin-top:20px;background:#F0FDF4;border-left:3px solid #16A34A;padding:12px 14px;border-radius:4px;font-size:13px;color:#166534;">
+          <strong>Cost: free.</strong> Setup time: about 30 minutes.
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="check-row"><span class="check">✓</span> Shows in Google Maps and local search</div>
+        <div class="check-row"><span class="check">✓</span> Displays your reviews, photos, and services</div>
+        <div class="check-row"><span class="check">✓</span> Lets customers call, message, or get directions</div>
+        <div class="check-row"><span class="check">✓</span> Shows your hours and whether you're open</div>
+        <div class="check-row"><span class="check">✓</span> Appears in AI-generated search answers</div>
+        <div style="margin-top:6px;" class="check-row"><span style="color:#C8102E;font-weight:700;font-size:16px;">✗</span> <span style="color:#991B1B;">46% of NZ painting businesses have incomplete or unclaimed profiles</span></div>
+      </div>
+    </div>
+  </div>
+</div>`,
+  notes: `The 200 clicks/month figure is from Birdeye's 2025 dataset (US/global). Flag to audience that it's an indicative benchmark, not a guaranteed NZ number — but directionally it's the right ballpark.\n\nThe key message: this is word-of-mouth at scale. A Google review is a recommendation that works 24 hours a day to every person who searches for painters in your area.\n\n46% of home services businesses have verified GBPs (Birdeye, 2025). That means roughly half your competitors aren't showing up at all. This is an open goal.`
+},
+
+{
+  section: "Section 1: Your Google front door",
+  title: "The priority ladder",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Where to start</div>
+    <h2 class="slide-h2">The priority ladder</h2>
+    <p style="font-size:14px;color:#374151;margin-top:8px;margin-bottom:24px;">Do not move to the next rung until the current one is genuinely sorted.</p>
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:640px;">
+      <div class="ladder-rung rung-1"><span class="rung-n">1</span><div><strong>GBP claimed, verified, complete.</strong> Photos and services listed. Review link saved in your phone. Free.</div></div>
+      <div class="ladder-rung rung-2"><span class="rung-n">2</span><div><strong>Reviews.</strong> Text your last three happy customers today. Ask every customer going forward. One new review a month, minimum.</div></div>
+      <div class="ladder-rung rung-3"><span class="rung-n">3</span><div><strong>Before/prep/after photos</strong> on every job. Three minutes per job. Non-negotiable.</div></div>
+      <div class="ladder-rung rung-4"><span class="rung-n">4</span><div><strong>One post per week</strong> on Facebook. Consistent beats brilliant.</div></div>
+      <div class="ladder-rung rung-5"><span class="rung-n">5</span><div><strong>MailerLite email list</strong> and the post-job thank-you automation.</div></div>
+      <div class="ladder-rung rung-6"><span class="rung-n">6</span><div style="color:#6B7280;"><strong>Everything else</strong> — ads, website, TikTok. Build these on top of Rungs 1–5 or they produce very little.</div></div>
+    </div>
+  </div>
+</div>`,
+  notes: `This is the most useful framework in the whole workshop. If someone asks "where do I start?" — the answer is always: start at Rung 1 and work down.\n\nDo not skip ahead. Painters who run Facebook ads before they have a solid GBP and reviews are wasting money. The foundation has to come first.\n\nUse this as a gentle check: "Hands up if you've got Rung 1 sorted. Rung 2?" This surfaces where the room actually is.`
+},
+
+{
+  section: "Section 1: Your Google front door",
+  title: "Getting reviews",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Reviews</div>
+    <h2 class="slide-h2">Reviews are word-of-mouth<br><span style="color:var(--dulux-sky);">at scale</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="stat-card" style="background:#FEF2F2;border-left:4px solid #C8102E;">
+          <div class="stat-num small" style="color:#C8102E;">68%</div>
+          <div class="stat-label dark">of consumers won't use a business rated under 4 stars (BrightLocal, 2026)</div>
+        </div>
+        <div class="stat-card" style="background:#EFF6FF;border-left:4px solid #2563EB;">
+          <div class="stat-num small" style="color:#2563EB;">88%</div>
+          <div class="stat-label dark">would use a business that responds to <em>all</em> reviews vs. 47% for businesses that respond to none (BrightLocal, 2024)</div>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:10px;">How to ask for a review</div>
+        <div style="background:#F0FDF4;border-radius:8px;padding:16px;font-size:13px;line-height:1.7;color:#166534;">
+          <strong>The text to send (right after the job):</strong><br><br>
+          "Hi [Name], thanks for having us. Really happy with how it turned out. If you've got 2 minutes, a Google review makes a big difference for a small business like ours — here's the link: [link]"
+        </div>
+        <div style="margin-top:14px;font-size:13px;color:#374151;line-height:1.6;">
+          Save your review link as a contact in your phone called "Google Review Link." Then sending it takes 20 seconds.
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:#6B7280;">
+          Note: always respond to every review — positive and negative. Daz can help you write responses in 30 seconds.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`,
+  notes: `The 88% vs 47% statistic is one of the most powerful in the workshop. Responding to reviews is free and takes a few minutes. Not responding is actively costing them customers.\n\nOn the "how to ask" template: the key insight is to make it effortless. The link is already in their phone. All they do is copy and paste it into a text message after the job. Remove every possible friction point.\n\n58% of consumers preferred an AI-written review response in a blind test (BrightLocal, 2024). That's a nice segue into Daz — the Dulux Marketing Offsider guide has a full review response template in Section 2, and Daz can generate one in 30 seconds.\n\nAlso worth mentioning: NoCowboys.co.nz ($49+GST/year) is a NZ-specific platform worth claiming. It shows in local search results.`
+},
+
+{
+  section: "Section 1: Your Google front door",
+  title: "Live demo 1",
+  html: `
+<div class="slide dark-teal">
+  <div class="demo-inner">
+    <div class="demo-badge">Live demo</div>
+    <h2 style="font-size:clamp(24px,4vw,42px);font-weight:900;color:#fff;line-height:1.15;margin-top:12px;">Ask<br>Daz</h2>
+    <p style="font-size:15px;color:rgba(255,255,255,0.75);margin-top:14px;max-width:440px;line-height:1.65;">What question do you have about Google or reviews? Yell it out and I'll put it straight into the tool.</p>
+    <div style="margin-top:28px;display:flex;flex-direction:column;gap:10px;max-width:440px;">
+      <div class="prompt-suggestion">"How do I find my Google review link?"</div>
+      <div class="prompt-suggestion">"How do I reply to a bad review?"</div>
+      <div class="prompt-suggestion">"How do I set up my Google Business Profile?"</div>
+    </div>
+    <p style="margin-top:28px;font-size:12px;color:rgba(255,255,255,0.4);">These are suggestions only — use the questions from the room.</p>
+  </div>
+</div>`,
+  notes: `Open Daz now. Take 2-3 questions from the room. Type each question in exactly as someone says it — no polishing — so they see how natural language queries work.\n\nIf the room is quiet, use one of the prompt suggestions on the slide.\n\nAfter 2-3 questions, wrap up and move on. The goal is to show it works and build confidence, not to cover everything.\n\nTiming check: you should be at approximately 17 minutes.`
+},
+
+// ── SECTION 2: PROOF OF WORK ──────────────────────────────
+{
+  section: "Section 2: Proof of work",
+  title: "Section intro: social",
+  html: `
+<div class="slide section-opener" style="background:#1E3A5F;">
+  <div class="section-opener-inner">
+    <div class="section-badge" style="background:#2563EB;">Section 2</div>
+    <h2 style="font-size:clamp(32px,5vw,56px);font-weight:900;color:#fff;line-height:1.1;">Proof of<br><span style="color:#60A5FA;">work</span></h2>
+    <p style="font-size:16px;color:rgba(255,255,255,0.65);margin-top:16px;max-width:460px;line-height:1.65;">Your phone is a marketing machine. Every job is a piece of content. Here's how to use it.</p>
+    <div style="margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;">
+      <div class="topic-tag">Before/prep/after photos</div>
+      <div class="topic-tag">Organic social</div>
+      <div class="topic-tag">Real painter examples</div>
+    </div>
+  </div>
+  <div class="section-time-badge">12 min</div>
+</div>`,
+  notes: `Transition into Section 2. The core idea: your work is your marketing. Before/after photos are the most powerful content type available to a painter and require no marketing training whatsoever.\n\nTiming: aim for 12 minutes including the live demo.`
+},
+
+{
+  section: "Section 2: Proof of work",
+  title: "The before/prep/after habit",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">The content habit</div>
+    <h2 class="slide-h2">Three photos.<br><span style="color:#2563EB;">Every single job.</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:18px;">
+      <div class="photo-card" style="border-top:4px solid #C8102E;">
+        <div class="photo-emoji">📸</div>
+        <div class="photo-label">Before</div>
+        <div class="photo-desc">The state of the surface before you touch it. Same angle as your after shot. Takes 20 seconds.</div>
+      </div>
+      <div class="photo-card" style="border-top:4px solid #F59E0B;">
+        <div class="photo-emoji">🖌️</div>
+        <div class="photo-label">Prep</div>
+        <div class="photo-desc">The work behind the work. Sugar soap, sanding, patching, priming. This is what separates a professional from a cowboy.</div>
+      </div>
+      <div class="photo-card" style="border-top:4px solid #16A34A;">
+        <div class="photo-emoji">✨</div>
+        <div class="photo-label">After</div>
+        <div class="photo-desc">The finished result. Same angle as the before. Natural light if possible. No clutter. One strong shot.</div>
+      </div>
+    </div>
+    <div style="margin-top:20px;background:#EFF6FF;border-left:3px solid #2563EB;padding:12px 16px;border-radius:4px;font-size:13px;color:#1E40AF;max-width:640px;">
+      Before/after imagery increases social media engagement by <strong>87–213%</strong> compared to text posts. Apps to use: Snapseed (free, phone editing), CapCut (free, simple video editing).
+    </div>
+  </div>
+</div>`,
+  notes: `The 87-213% engagement figure is from research by Baylor University/Journal of Marketing Research — flag that this is from studies of social media imagery generally, not painting specifically. The directional finding is robust though: transformations perform.\n\nEmphasise the prep photo specifically. This is where professional painters differentiate themselves. A homeowner can see a nice after photo anywhere. Showing the sanding, the patching, the priming tells a story about quality that no amount of text can communicate.\n\nTools to mention: Snapseed for quick mobile photo editing (free). CapCut for turning before/after into a simple video (free). Canva for adding your logo and business name to images (free).`
+},
+
+{
+  section: "Section 2: Proof of work",
+  title: "The four content pillars",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">What to post</div>
+    <h2 class="slide-h2">Four types of content.<br><span style="color:#2563EB;">One post per week minimum.</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;">
+      <div class="pillar-card blue">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">Before/after reveals</div>
+        <div class="pillar-desc">The transformation. Your strongest content type. Post these every time you have a quality job to show.</div>
+      </div>
+      <div class="pillar-card amber">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">Process and time-lapse</div>
+        <div class="pillar-desc">Film 10 seconds of spraying, cutting in, or prep work. Shows craftsmanship. Builds trust in a way the finished photo cannot.</div>
+      </div>
+      <div class="pillar-card green">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">Crew and behind-the-scenes</div>
+        <div class="pillar-desc">Your team on the job. Your van. Colour matching. The human side of the business. People buy from people.</div>
+      </div>
+      <div class="pillar-card purple">
+        <div class="pillar-num">04</div>
+        <div class="pillar-title">Colour and education</div>
+        <div class="pillar-desc">Why dark exteriors need different prep. What sheen to use in a kitchen. Seasonal tips. Positions you as the expert.</div>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:13px;color:#6B7280;">Start with Facebook. Add Instagram once Facebook feels routine. Consistent beats brilliant — one post a week for six months beats ten in January and then silence.</p>
+  </div>
+</div>`,
+  notes: `The four pillars map to what the most successful painting accounts in Australia and NZ are already doing. The accounts we'll show on the next slides all use some combination of these.\n\nKey message to land: consistency beats brilliance. A painter who posts once a week, every week, for six months will outperform someone who posts ten times in a burst and then disappears.\n\nOn platform choice: Facebook is still the primary channel for home services in NZ. It has the broadest reach among the 35-65 age group who are the core customer. Instagram is worth adding once Facebook is working. TikTok is an open opportunity (almost no NZ trade painters are there) but comes later.`
+},
+
+{
+  section: "Section 2: Proof of work",
+  title: "What good looks like: Australia",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Real examples — Australia</div>
+    <h2 class="slide-h2">What good looks like<br><span style="color:#2563EB;">at scale</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+      <div class="account-card">
+        <div class="account-handle">@rx_painters</div>
+        <div class="account-platform">Instagram · Sydney, NSW</div>
+        <div class="account-followers">~11,000 followers · 1,080 posts</div>
+        <div class="account-why">
+          <strong>Why it works:</strong> second-generation painter, exterior and spraying specialist, 20 years experience. Built a genuine 5-figure following purely on consistent work content and a clear niche. No gimmicks.
+        </div>
+        <div class="account-lesson">Lesson: niche + consistency = audience</div>
+      </div>
+      <div class="account-card">
+        <div class="account-handle">@neilsenspainting</div>
+        <div class="account-platform">Instagram · Brisbane/Sunshine Coast, QLD</div>
+        <div class="account-followers">~3,700 followers · 662 posts</div>
+        <div class="account-why">
+          <strong>Why it works:</strong> husband-and-wife team, Master Painter 2023 and 2024 Painter of the Year, before/after heritage restoration content. Turns industry awards directly into social proof.
+        </div>
+        <div class="account-lesson">Lesson: awards and accreditation are content</div>
+      </div>
+    </div>
+    <p style="margin-top:10px;font-size:11px;color:#9CA3AF;flex-shrink:0;">Follower counts approximate as of June 2026. Verify handles before presenting live.</p>
+  </div>
+</div>`,
+  notes: `Use these accounts as aspirational benchmarks but be careful not to make them feel out of reach. The point is not "you need 11,000 followers." The point is: a painter with a phone, a clear niche, and consistent posting built this. No agency. No big budget.\n\n@rx_painters posts job showcases, exterior repaints, spraying process videos. The niche (exteriors and dust-free sanding) is very clear in the bio. That specificity is part of what makes the content work.\n\n@neilsenspainting is particularly useful to show Dulux Accredited painters because it demonstrates how to turn accreditation and awards into content. Your Dulux accreditation is content. Post about it.\n\nNote: @nz_painting has the highest follower count (~28,000) but is actually based in Melbourne despite the handle — do not present it as a New Zealand example.`
+},
+
+{
+  section: "Section 2: Proof of work",
+  title: "What good looks like: New Zealand",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Real examples — New Zealand</div>
+    <h2 class="slide-h2">What's achievable<br><span style="color:#2563EB;">right here</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+      <div class="account-card nz">
+        <div class="account-handle">Nice Painting Company</div>
+        <div class="account-platform">Instagram + Facebook · Auckland & Nelson</div>
+        <div class="account-followers">~730 Instagram followers</div>
+        <div class="account-why">
+          <strong>Why it works:</strong> "Possibly the nicest painters in New Zealand" — a tagline that does real work. Consistent job-showcase posting, spray-finish quality focus, seven teams. Best NZ example of a distinctive brand voice at a realistic local scale.
+        </div>
+        <div class="account-lesson">Lesson: brand voice is a competitive advantage</div>
+      </div>
+      <div class="account-card nz">
+        <div class="account-handle">Auckland City Painters</div>
+        <div class="account-platform">Instagram + Facebook · Grafton, Auckland</div>
+        <div class="account-followers">~126 Instagram / ~1,070 Facebook</div>
+        <div class="account-why">
+          <strong>Why it works:</strong> educational posts ("How do dark exterior colours affect paint performance?"), online booking, Gold Award winners. Facebook is stronger than Instagram here — and that's fine.
+        </div>
+        <div class="account-lesson">Lesson: education builds trust; Facebook still works</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;background:#FFF7ED;border-left:3px solid #F59E0B;padding:8px 12px;border-radius:4px;font-size:12px;color:#92400E;max-width:640px;flex-shrink:0;">
+      The NZ benchmark for "good" is not follower count — it's content quality and consistency. 730 followers who are genuinely local and in-market is more valuable than 10,000 followers from anywhere.
+    </div>
+  </div>
+</div>`,
+  notes: `This slide resets expectations in a healthy way. NZ trade painters typically have 100-1,800 followers. That's real. The ceiling is lower than Australia because the market is smaller. But the opportunity is proportionally the same.\n\nNice Painting Company is the best NZ example of brand voice. "Possibly the nicest painters in New Zealand" is memorable, a little cheeky, and communicates quality without being generic. Ask the room: what would your version of that be?\n\nAuckland City Painters is useful to show that educational content works even at very small follower counts. They get engagement from genuinely useful posts.\n\nAlso worth mentioning if it comes up: Painter Girl & Co in Tauranga — Women in Trades angle, eco-focus, apprenticeship content. Strong differentiation story. Newton Painting Services (Josh & Sam Newton, Tauranga) — owner-led personality. Both show that a distinctive story matters more than size.`
+},
+
+{
+  section: "Section 2: Proof of work",
+  title: "The open opportunity",
+  html: `
+<div class="slide dark-navy">
+  <div class="slide-inner">
+    <div class="eyebrow teal">The open opportunity</div>
+    <h2 class="slide-h2 white">NZ painters are not<br><span style="color:#60A5FA;">on TikTok or YouTube.<br>Yet.</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px;max-width:640px;">
+      <div style="background:rgba(255,255,255,0.07);border-radius:8px;padding:18px;">
+        <div style="font-size:22px;margin-bottom:8px;">📱</div>
+        <div style="color:#fff;font-weight:700;font-size:14px;margin-bottom:6px;">TikTok</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:13px;line-height:1.6;">No genuine NZ trade painters have built a strong presence here. The platform is dominated by US painters and fine artists. Satisfying spray time-lapses and before/after reveals perform extremely well. First-mover advantage is real.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border-radius:8px;padding:18px;">
+        <div style="font-size:22px;margin-bottom:8px;">▶️</div>
+        <div style="color:#fff;font-weight:700;font-size:14px;margin-bottom:6px;">YouTube</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:13px;line-height:1.6;">Same story. Day-in-the-life, prep tutorials, colour advice — all underserved by local trade painters. Not a priority for today, but worth knowing the gap exists.</div>
+      </div>
+    </div>
+    <p style="margin-top:22px;font-size:14px;color:rgba(255,255,255,0.55);max-width:560px;line-height:1.65;">For now: get Facebook and Instagram sorted first. But if someone in this room wants to be the NZ painter on TikTok — the territory is wide open.</p>
+  </div>
+</div>`,
+  notes: `Keep this brief — it's a horizon point, not a priority for today. The message is: TikTok and YouTube are where the US painting market is exploding right now, and NZ is completely open territory. For the right person in the room (younger, comfortable on camera), this is a genuine opportunity.\n\nFor most people in the room though, the priority is getting Facebook sorted first. Don't let this slide pull the conversation off track.\n\nIf someone asks "should I be on TikTok?" — the honest answer is: once Facebook is working and you're posting consistently, yes, TikTok is worth experimenting with. Not before.`
+},
+
+{
+  section: "Section 2: Proof of work",
+  title: "Live demo 2",
+  html: `
+<div class="slide dark-teal">
+  <div class="demo-inner">
+    <div class="demo-badge">Live demo</div>
+    <h2 style="font-size:clamp(24px,4vw,42px);font-weight:900;color:#fff;line-height:1.15;margin-top:12px;">Ask<br>Daz</h2>
+    <p style="font-size:15px;color:rgba(255,255,255,0.75);margin-top:14px;max-width:440px;line-height:1.65;">Describe a job you've recently finished. I'll ask Daz to write a Facebook post for it — caption, hashtags, the lot.</p>
+    <div style="margin-top:28px;display:flex;flex-direction:column;gap:10px;max-width:440px;">
+      <div class="prompt-suggestion">"Write a Facebook post for an exterior repaint in [suburb]"</div>
+      <div class="prompt-suggestion">"Write a caption for a before and after interior job"</div>
+      <div class="prompt-suggestion">"What hashtags should I use for a painting post in Wellington?"</div>
+    </div>
+  </div>
+</div>`,
+  notes: `Take 2-3 questions or job descriptions from the room. Type each one naturally into Daz. Let people see the output.\n\nGood follow-up prompt if the first response is too generic: "Make it sound more like a local NZ tradesperson — plain, direct language, no corporate phrases."\n\nIf someone gives you a real job description (exterior repaint, specific suburb), even better — it shows the tool can personalise to their actual work.\n\nTiming check: you should be at approximately 29 minutes.`
+},
+
+// ── SECTION 3: AI TOOLS ────────────────────────────────────
+{
+  section: "Section 3: AI as your admin offsider",
+  title: "Section intro: AI",
+  html: `
+<div class="slide section-opener" style="background:#0D2B2B;">
+  <div class="section-opener-inner">
+    <div class="section-badge" style="background:var(--aivolve-teal);">Section 3</div>
+    <h2 style="font-size:clamp(32px,5vw,56px);font-weight:900;color:#fff;line-height:1.1;">AI as your<br><span style="color:#00C2A0;">admin offsider</span></h2>
+    <p style="font-size:16px;color:rgba(255,255,255,0.65);margin-top:16px;max-width:480px;line-height:1.65;">82% of small businesses think AI isn't for them. They're wrong. Here's what it can actually do for a painter today.</p>
+    <div style="margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;">
+      <div class="topic-tag" style="border-color:var(--aivolve-teal);color:var(--aivolve-teal);">AI writing tools</div>
+      <div class="topic-tag" style="border-color:var(--aivolve-teal);color:var(--aivolve-teal);">The prompt library</div>
+      <div class="topic-tag" style="border-color:var(--aivolve-teal);color:var(--aivolve-teal);">Missed call agents</div>
+    </div>
+  </div>
+  <div class="section-time-badge">10 min</div>
+</div>`,
+  notes: `Transition into Section 3. Key framing: 82% of micro-businesses (under 5 employees) say AI is not applicable to them (SBA Office of Advocacy, September 2025). This is a perception problem, not a technology problem.\n\nThe education opportunity here is significant. AI has crossed the threshold from novelty to practical tool for businesses exactly like these.\n\nTiming: aim for 10 minutes including live demo.`
+},
+
+{
+  section: "Section 3: AI as your admin offsider",
+  title: "What AI can do for a painter",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">AI writing tools</div>
+    <h2 class="slide-h2">The writing tasks that<br><span style="color:var(--aivolve-teal);">eat your time</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px;">
+      <div class="ai-task-card">
+        <div class="ai-task-icon">⭐</div>
+        <div class="ai-task-title">Review responses</div>
+        <div class="ai-task-desc">Reply to every review — good and bad — in 30 seconds. 58% of consumers preferred an AI-written response in a blind test.</div>
+      </div>
+      <div class="ai-task-card">
+        <div class="ai-task-icon">📱</div>
+        <div class="ai-task-title">Social media captions</div>
+        <div class="ai-task-desc">Describe the job and the suburb. Get a complete caption with hashtags. Edit to sound like you.</div>
+      </div>
+      <div class="ai-task-card">
+        <div class="ai-task-icon">📧</div>
+        <div class="ai-task-title">Quote follow-ups</div>
+        <div class="ai-task-desc">A polite follow-up text 2-3 days after sending a quote. One prompt, one send. Every time.</div>
+      </div>
+      <div class="ai-task-card">
+        <div class="ai-task-icon">💬</div>
+        <div class="ai-task-title">Customer messages</div>
+        <div class="ai-task-desc">Tricky customer? Difficult situation? Describe it, get a professional, calm reply drafted in seconds.</div>
+      </div>
+      <div class="ai-task-card">
+        <div class="ai-task-icon">✉️</div>
+        <div class="ai-task-title">Email marketing</div>
+        <div class="ai-task-desc">Post-job thank you, seasonal check-ins, referral requests. Write once, send automatically.</div>
+      </div>
+      <div class="ai-task-card">
+        <div class="ai-task-icon">📋</div>
+        <div class="ai-task-title">Quote summaries</div>
+        <div class="ai-task-desc">Turn your scope notes into a professional, readable quote summary for the customer.</div>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:12px;color:#9CA3AF;">Cost: ChatGPT is free. ChatGPT Plus (~NZD $33/month) produces better results for writing tasks. Claude is also free to start.</p>
+  </div>
+</div>`,
+  notes: `The 58% preference for AI-written review responses is from BrightLocal 2024 — a blind test where consumers couldn't tell which responses were written by AI and which by humans. They preferred the AI ones. This is a strong stat to use.\n\nThe AI writing tools that matter most for painters are ChatGPT and Claude. Both are free to start. Daz is the custom GPT built on the Dulux Marketing Offsider guide.\n\nKey message: AI doesn't replace you. It drafts. You edit. You put your name on it. But the blank-page problem — "I don't know what to write" — disappears.\n\nSave time stat: early-adopting small businesses save 13+ hours per week on admin using AI writing tools (ServiceM8, 2025). That's time back on the tools.`
+},
+
+{
+  section: "Section 3: AI as your admin offsider",
+  title: "AI for missed calls",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Never miss a lead</div>
+    <h2 class="slide-h2">A missed call is<br><span style="color:var(--aivolve-teal);">a missed job</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;align-items:start;">
+      <div>
+        <p style="font-size:14px;line-height:1.7;color:#374151;">When you're on the tools, you can't answer the phone. Every missed call is a potential customer who will ring the next painter on the list. Most won't leave a voicemail.</p>
+        <p style="font-size:14px;line-height:1.7;color:#374151;margin-top:12px;">AI call agents answer every inbound call, qualify the lead, and notify you immediately — 24 hours a day, seven days a week.</p>
+        <div style="margin-top:16px;background:#F0FDF4;border-left:3px solid var(--aivolve-teal);padding:12px 14px;border-radius:4px;font-size:13px;color:#065F46;">
+          <strong>Disclosure:</strong> AIvolve (aivolve.co.nz) is an AI call agent built for NZ and Australian trades businesses. The workshop presenter is a co-founder. NZD $25–110/month. Other options: ServiceM8's AI Phone Agent (part of their job management platform).
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:10px;">The minimum: a better voicemail</div>
+        <div style="background:#F9FAFB;border-radius:8px;padding:16px;font-size:13px;line-height:1.7;color:#374151;border:1px solid #E5E7EB;">
+          <strong>Record this as your voicemail right now:</strong><br><br>
+          "Hi, you've reached [Name] from [Business name]. I'm on the tools right now. Leave your name and number and I'll call you back within the hour."
+        </div>
+        <p style="margin-top:12px;font-size:13px;color:#374151;line-height:1.6;">At minimum, set up an auto-text reply on your phone for missed calls. iPhone: Settings → Phone → Respond with Text. This alone captures leads you're currently losing.</p>
+      </div>
+    </div>
+  </div>
+</div>`,
+  notes: `This is the AIvolve slide. Be transparent about the commercial interest — say it out loud at the slide and don't downplay it. The disclosure is in the slide itself.\n\nThe broader point stands regardless of which tool they use: missed calls are genuinely costing painting businesses work. The AI call agent category is real and growing.\n\nFor painters who aren't ready for an AI call agent, the minimum viable action is: (1) record a professional voicemail and (2) set up an auto-text reply on their phone. Both are free and take 5 minutes.\n\nServiceM8's AI Phone Agent is worth mentioning as an alternative — it's built into their job management platform ($29+/month USD) rather than a standalone tool.`
+},
+
+{
+  section: "Section 3: AI as your admin offsider",
+  title: "AI colour visualisation",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Bonus: AI for client conversations</div>
+    <h2 class="slide-h2">Show clients what it will<br><span style="color:var(--aivolve-teal);">look like before you start</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:28px;">
+      <div class="viz-card">
+        <div class="viz-name">Paint AI</div>
+        <div class="viz-tag">Free app</div>
+        <div class="viz-desc">Virtual colour testing on-site using your phone camera. Show clients realistic colour previews in real-time during a quoting visit.</div>
+      </div>
+      <div class="viz-card">
+        <div class="viz-name">Visualizee</div>
+        <div class="viz-tag">Subscription</div>
+        <div class="viz-desc">Realistic AI exterior colour rendering from a photo. Upload a photo of the house, apply colour palettes, share with the client digitally.</div>
+      </div>
+      <div class="viz-card">
+        <div class="viz-name">Tilesview</div>
+        <div class="viz-tag">Free, web-based</div>
+        <div class="viz-desc">Free colour visualiser. No app download required. Good for quick conversations during quoting.</div>
+      </div>
+    </div>
+    <div style="margin-top:20px;background:#F0FDF4;border-left:3px solid var(--aivolve-teal);padding:12px 16px;border-radius:4px;font-size:13px;color:#065F46;max-width:600px;">
+      Dulux also has its own colour visualisation tools. Check dulux.co.nz for the most current versions — features update regularly.
+    </div>
+  </div>
+</div>`,
+  notes: `Keep this brief — it's a bonus slide rather than a core topic. The key point is: AI can help with client conversations during the quoting process, not just with marketing admin.\n\nPaint AI and Tilesview are both free — low barrier to try. Visualizee is subscription-based but produces more polished results.\n\nVerify current Dulux NZ visualisation tools before the session — the Dulux ColourWall and Dulux Colour Explore tools update regularly and may have new AI features.\n\nThis is also covered in Section 8 of the Dulux Marketing Offsider guide. Ask Daz "What colour visualisation tools can I use as a painter?" and it will walk them through the options.`
+},
+
+{
+  section: "Section 3: AI as your admin offsider",
+  title: "Live demo 3",
+  html: `
+<div class="slide dark-teal">
+  <div class="demo-inner">
+    <div class="demo-badge">Live demo</div>
+    <h2 style="font-size:clamp(24px,4vw,42px);font-weight:900;color:#fff;line-height:1.15;margin-top:12px;">Ask<br>Daz</h2>
+    <p style="font-size:15px;color:rgba(255,255,255,0.75);margin-top:14px;max-width:440px;line-height:1.65;">What's a real situation you want help writing? Yell it out. Bad review, tricky customer, quote follow-up — anything.</p>
+    <div style="margin-top:28px;display:flex;flex-direction:column;gap:10px;max-width:440px;">
+      <div class="prompt-suggestion">"Write a reply to a one-star review about pricing"</div>
+      <div class="prompt-suggestion">"Write a follow-up text for a quote I sent three days ago"</div>
+      <div class="prompt-suggestion">"Write a polite message to a customer who keeps changing the scope"</div>
+    </div>
+  </div>
+</div>`,
+  notes: `Take 2-3 real situations from the room. The review response and quote follow-up are the two most universally useful prompts — most painters will relate to both.\n\nIf someone gives you a genuinely specific situation ("I had a customer leave a one-star review saying I didn't show up but I did show up"), put it in exactly as they describe it. The specificity will produce a better response and show the tool's capability.\n\nTiming check: you should be at approximately 39 minutes.`
+},
+
+// ── SECTION 4: CUSTOMER BASE ──────────────────────────────
+{
+  section: "Section 4: Building your customer base",
+  title: "Section intro: email and ads",
+  html: `
+<div class="slide section-opener" style="background:#2D1B69;">
+  <div class="section-opener-inner">
+    <div class="section-badge" style="background:#7C3AED;">Section 4</div>
+    <h2 style="font-size:clamp(32px,5vw,56px);font-weight:900;color:#fff;line-height:1.1;">Building your<br><span style="color:#A78BFA;">customer base</span></h2>
+    <p style="font-size:16px;color:rgba(255,255,255,0.65);margin-top:16px;max-width:480px;line-height:1.65;">Your customer list is an asset. Email marketing and — when you're ready — paid advertising are how you use it.</p>
+    <div style="margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;">
+      <div class="topic-tag" style="border-color:#A78BFA;color:#A78BFA;">Email marketing</div>
+      <div class="topic-tag" style="border-color:#A78BFA;color:#A78BFA;">Paid advertising</div>
+    </div>
+  </div>
+  <div class="section-time-badge">8 min</div>
+</div>`,
+  notes: `Transition into Section 4. This is the lightest section time-wise — 8 minutes. Email is the priority; paid advertising gets one slide.\n\nTiming: aim for 8 minutes including live demo.`
+},
+
+{
+  section: "Section 4: Building your customer base",
+  title: "Email marketing",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Email marketing</div>
+    <h2 class="slide-h2">Your customer list<br><span style="color:#7C3AED;">is worth money</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;align-items:start;">
+      <div>
+        <div class="stat-card" style="background:#F5F3FF;border-left:4px solid #7C3AED;margin-bottom:16px;">
+          <div class="stat-num small" style="color:#7C3AED;">42:1</div>
+          <div class="stat-label dark">return on investment from email marketing — estimated average across industries (Litmus/DMA)</div>
+        </div>
+        <p style="font-size:14px;line-height:1.7;color:#374151;">Most painting businesses have no mailing list at all. Every customer whose email you have is a future repeat job, a referral, and a word-of-mouth recommendation you can activate.</p>
+        <p style="font-size:14px;line-height:1.7;color:#374151;margin-top:10px;">You only need two things to start: MailerLite (free up to 1,000 contacts) and the email addresses you've collected from jobs.</p>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:10px;">The four automations to set up</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="email-automation" style="border-left:3px solid #16A34A;">
+            <strong>Post-job thank you + review request</strong><br>
+            <span>Sends 48 hours after job complete. Set it up once.</span>
+          </div>
+          <div class="email-automation" style="border-left:3px solid #2563EB;">
+            <strong>Three-month follow-up</strong><br>
+            <span>Brief check-in and referral offer at 90 days.</span>
+          </div>
+          <div class="email-automation" style="border-left:3px solid #F59E0B;">
+            <strong>Seasonal check-in</strong><br>
+            <span>Spring exterior, winter interior reminder at 6 months.</span>
+          </div>
+          <div class="email-automation" style="border-left:3px solid #7C3AED;">
+            <strong>Annual re-engagement</strong><br>
+            <span>One year on — any upcoming painting work?</span>
+          </div>
+        </div>
+        <p style="margin-top:12px;font-size:12px;color:#9CA3AF;">Tool: MailerLite (mailerlite.com) — free up to 1,000 contacts. NZ $0/month to start.</p>
+      </div>
+    </div>
+  </div>
+</div>`,
+  notes: `The 42:1 ROI figure is an industry average from Litmus/DMA — flag it as indicative rather than a guarantee. The direction is right: email to a warm list (past customers) produces extremely high returns compared to cold outbound.\n\nMost painters in the room will have email addresses scattered across job software, invoicing, and their own contacts. MailerLite lets them pull these together into a proper list for free.\n\nThe four automations are set up once and run indefinitely. The post-job thank you and review request is the most important one — it handles two things (the thank you and the review ask) automatically, every time.\n\nNZ compliance note: Unsolicited Electronic Messages Act 2007 governs commercial email. Emailing past customers = implied consent. MailerLite handles unsubscribes automatically.`
+},
+
+{
+  section: "Section 4: Building your customer base",
+  title: "Paid advertising: when it makes sense",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Paid advertising</div>
+    <h2 class="slide-h2">Ads amplify what's<br><span style="color:#7C3AED;">already working</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;">
+      <div>
+        <div style="font-weight:700;font-size:14px;color:#374151;margin-bottom:10px;">Before you spend a dollar on ads, check:</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="threshold-row pass"><span class="threshold-icon">✓</span> GBP is complete and verified</div>
+          <div class="threshold-row pass"><span class="threshold-icon">✓</span> At least 15 Google reviews</div>
+          <div class="threshold-row pass"><span class="threshold-icon">✓</span> Posting consistently for 4+ weeks</div>
+          <div class="threshold-row pass"><span class="threshold-icon">✓</span> Can respond to leads within the hour</div>
+          <div class="threshold-row fail"><span class="threshold-icon" style="color:#C8102E;">✗</span> <span style="color:#991B1B;">If any of these aren't true, fix them first. Ads on a shaky foundation waste money.</span></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:14px;color:#374151;margin-bottom:10px;">Ballpark NZD costs</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="ad-cost-card" style="border-left:3px solid #1877F2;">
+            <div style="font-weight:700;color:#1877F2;">Meta Ads (Facebook + Instagram)</div>
+            <div style="font-size:13px;color:#374151;margin-top:4px;">Start at NZD $300–500/month. Generates approximately 8–17 leads/month at this budget. Meta first — it's cheaper and more visual.</div>
+          </div>
+          <div class="ad-cost-card" style="border-left:3px solid #4285F4;">
+            <div style="font-weight:700;color:#4285F4;">Google Ads</div>
+            <div style="font-size:13px;color:#374151;margin-top:4px;">Start at NZD $450/month minimum. High-intent (people searching "painter [suburb]") but more expensive. Add after Meta is working.</div>
+          </div>
+        </div>
+        <p style="margin-top:12px;font-size:12px;color:#9CA3AF;">Ask Daz for step-by-step guidance on Meta and Google Ads targeting, ad copy, and what to track.</p>
+      </div>
+    </div>
+  </div>
+</div>`,
+  notes: `Be clear about the thresholds. This isn't being conservative — it's based on what the research actually shows. Painters who run ads before having a solid review profile and GBP produce poor-quality leads because the ad sends people to an incomplete profile that doesn't convert.\n\nMeta first, Google later. Meta is cheaper and works well for home services because it's visual (before/after photos make great ads). Google Ads have higher intent (someone actively searching) but are more expensive per click.\n\nThe 8-17 leads/month figure for $500/month Meta spend is from the research. Flag it as approximate — results vary by location, targeting, and creative.\n\nFor anyone who asks "should I use Google Local Services Ads?" — worth checking. Google LSA availability in NZ was expanding in late 2025/2026. Section 7 of the Dulux Marketing Offsider guide covers Google Ads in detail, and Daz can answer specific questions.`
+},
+
+{
+  section: "Section 4: Building your customer base",
+  title: "Live demo 4",
+  html: `
+<div class="slide dark-teal">
+  <div class="demo-inner">
+    <div class="demo-badge">Live demo</div>
+    <h2 style="font-size:clamp(24px,4vw,42px);font-weight:900;color:#fff;line-height:1.15;margin-top:12px;">Ask<br>Daz</h2>
+    <p style="font-size:15px;color:rgba(255,255,255,0.75);margin-top:14px;max-width:440px;line-height:1.65;">Questions about email or advertising? Or anything else from today? Yell it out.</p>
+    <div style="margin-top:28px;display:flex;flex-direction:column;gap:10px;max-width:440px;">
+      <div class="prompt-suggestion">"Should I run Facebook ads or Google Ads?"</div>
+      <div class="prompt-suggestion">"How do I set up MailerLite for my painting business?"</div>
+      <div class="prompt-suggestion">"Write me a post-job thank you email"</div>
+    </div>
+  </div>
+</div>`,
+  notes: `Final demo slot. Take whatever questions come from the room — by this point people should be more comfortable asking.\n\nIf the group is quiet, use the "should I run Facebook ads or Google Ads?" prompt — Daz's decision tree response is a good example of how it handles nuanced questions.\n\nTiming check: you should be at approximately 47 minutes. Start wrapping toward the closing section.`
+},
+
+// ── SECTION 5: WHAT ELSE IS IN THE GUIDE ──────────────────
+{
+  section: "Closing: What's in the guide",
+  title: "Section intro: the guide",
+  html: `
+<div class="slide section-opener" style="background:#1A1F2B;">
+  <div class="section-opener-inner">
+    <div class="section-badge" style="background:#374151;">Closing</div>
+    <h2 style="font-size:clamp(32px,5vw,56px);font-weight:900;color:#fff;line-height:1.1;">What else is<br><span style="color:#9CA3AF;">in the guide</span></h2>
+    <p style="font-size:16px;color:rgba(255,255,255,0.65);margin-top:16px;max-width:480px;line-height:1.65;">Today covered Sections 1 to 6. Here's what's waiting for you in the Dulux Marketing Offsider guide when you're ready to go further.</p>
+  </div>
+  <div class="section-time-badge">5 min</div>
+</div>`,
+  notes: `Quick transition into the closing. 5 minutes here, then 10 minutes for Q&A.\n\nFrame this clearly: we covered the foundations today. The Dulux Marketing Offsider guide has a lot more — and Daz knows all of it. Anything in the guide, they can just ask Daz.`
+},
+
+{
+  section: "Closing: What's in the guide",
+  title: "The guide: what we covered",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Dulux Marketing Offsider guide</div>
+    <h2 class="slide-h2">What we covered today</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;">
+      <div class="guide-section covered">
+        <div class="guide-sec-num">Sec 0</div>
+        <div class="guide-sec-title">Which path is right for you</div>
+      </div>
+      <div class="guide-section covered">
+        <div class="guide-sec-num">Sec 1</div>
+        <div class="guide-sec-title">Google Business Profile</div>
+      </div>
+      <div class="guide-section covered">
+        <div class="guide-sec-num">Sec 2</div>
+        <div class="guide-sec-title">Online reviews</div>
+      </div>
+      <div class="guide-section covered">
+        <div class="guide-sec-num">Sec 3</div>
+        <div class="guide-sec-title">Visual marketing</div>
+      </div>
+      <div class="guide-section covered">
+        <div class="guide-sec-num">Sec 4</div>
+        <div class="guide-sec-title">Social media</div>
+      </div>
+      <div class="guide-section covered">
+        <div class="guide-sec-num">Sec 5</div>
+        <div class="guide-sec-title">AI tools + prompt library</div>
+      </div>
+      <div class="guide-section covered">
+        <div class="guide-sec-num">Sec 6</div>
+        <div class="guide-sec-title">Email marketing</div>
+      </div>
+      <div class="guide-section covered">
+        <div class="guide-sec-num">Sec 7</div>
+        <div class="guide-sec-title">Paid advertising</div>
+      </div>
+      <div class="guide-section covered">
+        <div class="guide-sec-num">Sec 0b</div>
+        <div class="guide-sec-title">Priority ladder + minimum system</div>
+      </div>
+    </div>
+  </div>
+</div>`,
+  notes: `Show them what they've covered. The ticked sections represent a solid foundation — GBP, reviews, visual marketing, social, AI tools, email, basic ads awareness, and the priority ladder framework.\n\nNow transition to the next slide showing everything else that's in the guide.`
+},
+
+{
+  section: "Closing: What's in the guide",
+  title: "The guide: what's still to explore",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Still in the Dulux Marketing Offsider guide</div>
+    <h2 class="slide-h2">When you're ready<br><span style="color:#374151;">to go further</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;">
+      <div class="guide-section remaining">
+        <div class="guide-sec-num">Sec 8</div>
+        <div class="guide-sec-title">Tool-by-tool setup</div>
+        <div class="guide-sec-sub">Step-by-step for every tool mentioned today</div>
+      </div>
+      <div class="guide-section remaining">
+        <div class="guide-sec-num">Sec 9</div>
+        <div class="guide-sec-title">Websites</div>
+        <div class="guide-sec-sub">When you need one, what to include, Squarespace vs Tradify Instant</div>
+      </div>
+      <div class="guide-section remaining">
+        <div class="guide-sec-num">Sec 10</div>
+        <div class="guide-sec-title">Dulux accreditation + trust</div>
+        <div class="guide-sec-sub">How to use your accreditation as marketing material</div>
+      </div>
+      <div class="guide-section remaining">
+        <div class="guide-sec-num">Sec 11</div>
+        <div class="guide-sec-title">Lead qualification</div>
+        <div class="guide-sec-sub">Filter for better-quality jobs, not just more jobs</div>
+      </div>
+      <div class="guide-section remaining">
+        <div class="guide-sec-num">Sec 12</div>
+        <div class="guide-sec-title">Measurement + tracking</div>
+        <div class="guide-sec-sub">Five numbers to check every Friday — takes 5 minutes</div>
+      </div>
+      <div class="guide-section remaining">
+        <div class="guide-sec-num">Sec 13</div>
+        <div class="guide-sec-title">Objections answered</div>
+        <div class="guide-sec-sub">"I don't have time." "My customers aren't online." And so on.</div>
+      </div>
+      <div class="guide-section remaining">
+        <div class="guide-sec-num">Sec 14</div>
+        <div class="guide-sec-title">Digital stack by stage</div>
+        <div class="guide-sec-sub">What tools to add as your business grows</div>
+      </div>
+      <div class="guide-section remaining">
+        <div class="guide-sec-num">Sec 15</div>
+        <div class="guide-sec-title">Quick reference</div>
+        <div class="guide-sec-sub">Key stats, first-week checklist, NZ platform list</div>
+      </div>
+      <div class="guide-section remaining">
+        <div class="guide-sec-num">Sec 16–17</div>
+        <div class="guide-sec-title">Privacy, safety + glossary</div>
+        <div class="guide-sec-sub">Safe AI use and plain-English definitions</div>
+      </div>
+    </div>
+  </div>
+</div>`,
+  notes: `Walk through these briefly — don't spend more than a minute here. The message is: the Dulux Marketing Offsider guide is comprehensive. Daz knows all of it. Instead of hunting through sections, they just ask Daz the question.\n\nHighlight two or three that are particularly relevant to the room. Section 10 (Dulux accreditation as marketing) is always relevant here. Section 12 (measurement) is good to call out — it's just five numbers checked once a week.`
+},
+
+{
+  section: "Closing: What's in the guide",
+  title: "Using Daz after today",
+  html: `
+<div class="slide dark-navy">
+  <div class="slide-inner" style="justify-content:center;align-items:flex-start;">
+    <div class="eyebrow teal">Daz — your custom GPT</div>
+    <h2 class="slide-h2 white">How to use it<br><span style="color:#00A9CE;">after today</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;max-width:640px;">
+      <div style="background:rgba(255,255,255,0.07);border-radius:8px;padding:16px;">
+        <div style="color:#fff;font-weight:700;font-size:13px;margin-bottom:8px;">Ask Daz anything from the guide</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:13px;line-height:1.6;">"How do I set up my Dulux accreditation listing?" — goes to Section 10.<br>"What's a good website setup for a sole trader?" — goes to Section 9.<br>"Give me the first-week checklist" — goes to Section 15.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border-radius:8px;padding:16px;">
+        <div style="color:#fff;font-weight:700;font-size:13px;margin-bottom:8px;">Ask it to do things for you</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:13px;line-height:1.6;">"Write a reply to this review [paste the review]."<br>"Write a Facebook caption for [describe the job]."<br>"Draft a quote follow-up email."</div>
+      </div>
+    </div>
+    <div style="margin-top:20px;background:rgba(0,194,160,0.1);border-left:3px solid var(--aivolve-teal);padding:12px 16px;border-radius:4px;font-size:13px;color:rgba(255,255,255,0.75);max-width:560px;">
+      Access details are in your resource pack. Daz requires a free ChatGPT account. Your resource pack also includes the Dulux Marketing Offsider guide as a PDF — the written document Daz is built on.
+    </div>
+  </div>
+</div>`,
+  notes: `This is the key handover slide. Make the distinction clear: the Dulux Marketing Offsider is the written guide they can read at their own pace. Daz is the custom GPT they can ask questions to. Both are in the resource pack.\n\nRemind them how to access it — the link is in their resource pack. They need a ChatGPT account (free to set up if they don't have one).\n\nThe written PDF of the full guide is also in the resource pack. Some people will read the guide; others will just ask Daz. Both work.\n\nAlso mention: Section 5 of the Dulux Marketing Offsider guide has a full prompt library — pre-written prompts for the most common tasks. They can copy-paste from the PDF or just ask Daz to run them.`
+},
+
+// ── CLOSING ────────────────────────────────────────────────
+{
+  section: "Closing: What's in the guide",
+  title: "Your action plan: day 1",
+  html: `
+<div class="slide light">
+  <div class="slide-inner">
+    <div class="eyebrow">Tomorrow morning</div>
+    <h2 class="slide-h2">One thing to do<br><span style="color:var(--dulux-sky);">when you get home</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;align-items:start;">
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#111827;margin-bottom:14px;">Day 1 — 30 minutes</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="action-row"><span class="action-check">1</span> Search your business name on Google</div>
+          <div class="action-row"><span class="action-check">2</span> Claim or verify your GBP at business.google.com</div>
+          <div class="action-row"><span class="action-check">3</span> Upload 10 real photos of completed jobs</div>
+          <div class="action-row"><span class="action-check">4</span> Find your review link — save it as a phone contact</div>
+          <div class="action-row"><span class="action-check">5</span> Text it to three happy past customers tonight</div>
+          <div class="action-row"><span class="action-check">6</span> Record a professional voicemail greeting</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#111827;margin-bottom:14px;">First 7 days</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="action-row"><span class="action-check" style="background:#2563EB;">7</span> Take before/prep/after photos on your next job</div>
+          <div class="action-row"><span class="action-check" style="background:#2563EB;">8</span> Post it on Facebook — ask Daz to write the caption</div>
+          <div class="action-row"><span class="action-check" style="background:#2563EB;">9</span> Reply to every existing review on your GBP</div>
+          <div class="action-row"><span class="action-check" style="background:#2563EB;">10</span> Set up a free MailerLite account and import your customer list</div>
+          <div class="action-row"><span class="action-check" style="background:#2563EB;">11</span> Block 30 minutes every week for marketing (put it in your calendar now)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`,
+  notes: `Land this clearly. The 1/7/30/90-day roadmap is in their resource pack — this slide covers just Days 1 and 7.\n\nKey message: don't try to do everything at once. Start at the top of the list. Do one thing this week.\n\nIf you have time, ask the room: "Who's going to check their Google Business Profile tonight?" Getting a public commitment, even in a small group, increases follow-through significantly.\n\nThe full 30-day and 90-day plans are in the Dulux Marketing Offsider guide, Section 0c.`
+},
+
+{
+  section: "Closing: What's in the guide",
+  title: "Key stats to remember",
+  html: `
+<div class="slide dark-navy">
+  <div class="slide-inner">
+    <div class="eyebrow teal">Key numbers</div>
+    <h2 class="slide-h2 white" style="font-size:clamp(20px,3vw,32px);margin-bottom:20px;">Worth remembering</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+      <div class="mini-stat"><span style="color:#00A9CE;font-size:22px;font-weight:900;">200</span><span style="display:block;font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">clicks/month from a fully optimised GBP (Birdeye, 2025)</span></div>
+      <div class="mini-stat"><span style="color:#C8102E;font-size:22px;font-weight:900;">68%</span><span style="display:block;font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">won't use a business rated under 4 stars (BrightLocal, 2026)</span></div>
+      <div class="mini-stat"><span style="color:#00C2A0;font-size:22px;font-weight:900;">42:1</span><span style="display:block;font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">email marketing ROI — estimated average (Litmus/DMA)</span></div>
+      <div class="mini-stat"><span style="color:#60A5FA;font-size:22px;font-weight:900;">88%</span><span style="display:block;font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">would use a business that responds to all reviews vs. 47% for businesses that respond to none (BrightLocal, 2024)</span></div>
+      <div class="mini-stat"><span style="color:#F59E0B;font-size:22px;font-weight:900;">81%</span><span style="display:block;font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">of homeowners research contractors online before contacting (Databox/Renoworks, 2025)</span></div>
+      <div class="mini-stat"><span style="color:#A78BFA;font-size:22px;font-weight:900;">40%</span><span style="display:block;font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">of NZ businesses promote online. 60% don't. That gap is your opportunity (MBIE, 2024)</span></div>
+    </div>
+    <p style="margin-top:16px;font-size:11px;color:rgba(255,255,255,0.3);">All figures cited in the Dulux Marketing Offsider guide. Verify benchmarks against your own data over time.</p>
+  </div>
+</div>`,
+  notes: `Use this as a quick summary or leave it up during the Q&A as a reference.\n\nWorth flagging if anyone asks: the 200 clicks/month GBP figure is from Birdeye's global dataset (US-heavy). The NZ figure will vary. The directional finding — that a fully complete profile generates significantly more clicks than an incomplete one — is well-supported.\n\nAll stats are sourced. The full source list is in the Dulux Marketing Offsider guide.`
+},
+
+{
+  section: "Closing: What's in the guide",
+  title: "Thank you and Q&A",
+  html: `
+<div class="slide dark-navy">
+  <div class="slide-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <div style="display:flex;align-items:center;gap:18px;justify-content:center;margin-bottom:24px;">
+      <div class="pill red" style="font-size:12px;">Dulux Accredited Painter Workshop</div>
+      <div class="pill teal" style="font-size:12px;">AIvolve</div>
+    </div>
+    <h2 style="font-size:clamp(28px,5vw,52px);font-weight:900;color:#fff;line-height:1.1;">Questions?</h2>
+    <p style="font-size:15px;color:rgba(255,255,255,0.6);margin-top:16px;max-width:440px;line-height:1.65;">10 minutes. Ask anything — about what we've covered today, about the guide, or about your specific business situation.</p>
+    <div style="margin-top:36px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;max-width:560px;text-align:left;">
+      <div style="background:rgba(255,255,255,0.07);border-radius:8px;padding:14px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px;">Your guide</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.75);">Daz (custom GPT) — access link in your resource pack</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border-radius:8px;padding:14px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px;">Presenter</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.75);">Patrick Dodd<br>patrickdodd@aivolve.co.nz</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border-radius:8px;padding:14px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px;">References</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.75);">Full source list in the Dulux Marketing Offsider guide, Section 17</div>
+      </div>
+    </div>
+  </div>
+</div>`,
+  notes: `Final slide. Leave this up during Q&A.\n\nTake questions freely. If something comes up that you want to demo in Daz, do it — keep the tab open.\n\nAt the end, remind them: the resource pack has everything. The Dulux Marketing Offsider guide is the reference document; Daz is the tool they use day-to-day. The first thing to do is check their Google Business Profile tonight.\n\nThank Dulux for the partnership and the group for their time.`
+}
+
+];
+
+// ═══════════════════════════════════════════════════════════
+// SLIDE RENDERER
+// ═══════════════════════════════════════════════════════════
+
+const SLIDE_CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dulux-navy: #1B2A4A;
+    --dulux-red: #C8102E;
+    --dulux-sky: #00A9CE;
+    --aivolve-teal: #00C2A0;
+    --white: #FFFFFF;
+    --text-dark: #111827;
+    --text-mid: #374151;
+  }
+  html, body { width:100%; height:100%; overflow:hidden; }
+  body { font-family:'Inter',sans-serif; background:#fff; }
+
+  .slide {
+    width:100%; height:100%; position:relative; overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .slide.light { background:#F7F8FA; }
+  .slide.dark-navy { background:var(--dulux-navy); }
+  .slide.dark-teal { background:linear-gradient(135deg,#003D35,#005A4F); }
+
+  .slide-inner {
+    flex:1; display:flex; flex-direction:column;
+    padding:22px 36px 16px;
+    justify-content:flex-start;
+    overflow:hidden;
+    min-height:0;
+  }
+
+  .slide-inner > div[style*="grid"] {
+    min-height:0;
+    overflow:hidden;
+  }
+
+  .slide-h2 {
+    font-size:clamp(18px,2.8vw,32px);
+    font-weight:800; line-height:1.15; color:var(--text-dark);
+  }
+  .slide-h2.white { color:#fff; }
+
+  .eyebrow {
+    font-size:11px; font-weight:700; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--dulux-sky);
+    margin-bottom:8px;
+  }
+  .eyebrow.teal { color:var(--aivolve-teal); }
+
+  .pill {
+    display:inline-block; font-size:11px; font-weight:700;
+    letter-spacing:.05em; text-transform:uppercase;
+    padding:4px 12px; border-radius:20px;
+  }
+  .pill.red { background:var(--dulux-red); color:#fff; }
+  .pill.teal { background:var(--aivolve-teal); color:#fff; }
+
+  .slide-accent-bar {
+    height:4px; background:linear-gradient(90deg,var(--dulux-red),var(--dulux-sky),var(--aivolve-teal));
+    flex-shrink:0;
+  }
+
+  /* Stats */
+  .stat-card {
+    border-radius:8px; padding:16px;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .stat-card.navy { background:rgba(255,255,255,0.08); }
+  .stat-num { font-size:clamp(28px,4vw,44px); font-weight:900; line-height:1; }
+  .stat-num.small { font-size:clamp(24px,3.5vw,38px); }
+  .stat-label { font-size:12px; color:rgba(255,255,255,0.7); line-height:1.5; }
+  .stat-label.dark { color:var(--text-mid); }
+
+  /* Agenda */
+  .agenda-row {
+    display:flex; align-items:center; gap:14px;
+    font-size:15px; color:var(--text-dark); font-weight:500;
+  }
+  .agenda-num {
+    width:28px; height:28px; border-radius:50%; color:#fff;
+    font-size:13px; font-weight:800; display:flex; align-items:center;
+    justify-content:center; flex-shrink:0;
+  }
+
+  /* Feature chips */
+  .feature-chip {
+    background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15);
+    border-radius:6px; padding:10px 14px; font-size:13px;
+    color:rgba(255,255,255,0.8); font-style:italic;
+  }
+
+  /* Section opener */
+  .slide.section-opener { justify-content:center; }
+  .section-opener-inner {
+    padding:44px 52px; display:flex; flex-direction:column;
+  }
+  .section-badge {
+    display:inline-block; font-size:11px; font-weight:700;
+    letter-spacing:.08em; text-transform:uppercase; padding:4px 12px;
+    border-radius:4px; color:#fff; margin-bottom:16px;
+    background:var(--dulux-sky); width:fit-content;
+  }
+  .section-time-badge {
+    position:absolute; top:28px; right:36px;
+    background:rgba(255,255,255,0.1); border-radius:20px;
+    padding:4px 14px; font-size:12px; font-weight:600;
+    color:rgba(255,255,255,0.6);
+  }
+  .topic-tag {
+    border:1px solid rgba(255,255,255,0.3); border-radius:20px;
+    padding:4px 14px; font-size:12px; color:rgba(255,255,255,0.65);
+  }
+
+  /* Ladder */
+  .ladder-rung {
+    display:flex; align-items:flex-start; gap:12px;
+    padding:7px 12px; border-radius:8px; font-size:12px;
+    line-height:1.45; color:var(--text-dark);
+  }
+  .rung-n {
+    width:26px; height:26px; border-radius:50%; color:#fff;
+    font-size:12px; font-weight:800; display:flex; align-items:center;
+    justify-content:center; flex-shrink:0;
+  }
+  .rung-1 { background:#FEF2F2; } .rung-1 .rung-n { background:var(--dulux-red); }
+  .rung-2 { background:#FFF7ED; } .rung-2 .rung-n { background:#F59E0B; }
+  .rung-3 { background:#F0FDF4; } .rung-3 .rung-n { background:#16A34A; }
+  .rung-4 { background:#EFF6FF; } .rung-4 .rung-n { background:#2563EB; }
+  .rung-5 { background:#F5F3FF; } .rung-5 .rung-n { background:#7C3AED; }
+  .rung-6 { background:#F9FAFB; } .rung-6 .rung-n { background:#9CA3AF; }
+
+  /* Check rows */
+  .check-row { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--text-mid); line-height:1.5; margin-bottom:6px; }
+  .check { color:#16A34A; font-weight:800; font-size:16px; }
+
+  /* Photo cards */
+  .photo-card { background:#fff; border-radius:10px; padding:18px; box-shadow:0 1px 8px rgba(0,0,0,0.07); text-align:center; }
+  .photo-emoji { font-size:28px; margin-bottom:8px; }
+  .photo-label { font-weight:800; font-size:15px; color:var(--text-dark); margin-bottom:6px; }
+  .photo-desc { font-size:12px; color:var(--text-mid); line-height:1.6; }
+
+  /* Pillar cards */
+  .pillar-card { border-radius:10px; padding:18px; }
+  .pillar-card.blue { background:#EFF6FF; }
+  .pillar-card.amber { background:#FFFBEB; }
+  .pillar-card.green { background:#F0FDF4; }
+  .pillar-card.purple { background:#F5F3FF; }
+  .pillar-num { font-size:11px; font-weight:800; letter-spacing:.1em; color:#9CA3AF; margin-bottom:6px; }
+  .pillar-title { font-weight:700; font-size:14px; color:var(--text-dark); margin-bottom:6px; }
+  .pillar-desc { font-size:12px; color:var(--text-mid); line-height:1.6; }
+
+  /* Account cards */
+  .account-card { background:#fff; border-radius:10px; padding:14px; box-shadow:0 1px 8px rgba(0,0,0,0.07); border-top:4px solid #1877F2; }
+  .account-card.nz { border-top-color:var(--dulux-sky); }
+  .account-handle { font-weight:800; font-size:14px; color:var(--text-dark); }
+  .account-platform { font-size:11px; color:#9CA3AF; margin-top:2px; }
+  .account-followers { font-size:11px; color:var(--text-mid); margin-top:3px; font-weight:600; }
+  .account-why { font-size:11px; color:var(--text-mid); line-height:1.5; margin-top:8px; }
+  .account-lesson { font-size:10px; font-weight:700; color:var(--dulux-sky); margin-top:8px; text-transform:uppercase; letter-spacing:.05em; }
+
+  /* AI task cards */
+  .ai-task-card { background:#fff; border-radius:10px; padding:16px; box-shadow:0 1px 6px rgba(0,0,0,0.06); }
+  .ai-task-icon { font-size:20px; margin-bottom:6px; }
+  .ai-task-title { font-weight:700; font-size:13px; color:var(--text-dark); margin-bottom:4px; }
+  .ai-task-desc { font-size:11px; color:var(--text-mid); line-height:1.6; }
+
+  /* Viz cards */
+  .viz-card { background:#fff; border-radius:10px; padding:18px; box-shadow:0 1px 8px rgba(0,0,0,0.07); border-top:4px solid var(--aivolve-teal); }
+  .viz-name { font-weight:800; font-size:15px; color:var(--text-dark); }
+  .viz-tag { display:inline-block; background:#F0FDF4; color:#065F46; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin:4px 0 8px; }
+  .viz-desc { font-size:12px; color:var(--text-mid); line-height:1.6; }
+
+  /* Email automations */
+  .email-automation { padding:10px 14px; background:#F9FAFB; border-radius:6px; font-size:12px; color:var(--text-mid); line-height:1.5; }
+
+  /* Ad cost cards */
+  .ad-cost-card { background:#F9FAFB; border-radius:8px; padding:14px; }
+
+  /* Threshold rows */
+  .threshold-row { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--text-mid); padding:6px 10px; border-radius:6px; line-height:1.5; }
+  .threshold-row.pass { background:#F0FDF4; }
+  .threshold-row.fail { background:#FEF2F2; }
+  .threshold-icon { font-size:14px; font-weight:800; color:#16A34A; flex-shrink:0; }
+
+  /* Guide sections */
+  .guide-section { border-radius:8px; padding:9px 12px; }
+  .guide-section.covered { background:#F0FDF4; border-left:3px solid #16A34A; }
+  .guide-section.remaining { background:#F9FAFB; border-left:3px solid #E5E7EB; }
+  .guide-sec-num { font-size:10px; font-weight:700; color:#9CA3AF; text-transform:uppercase; letter-spacing:.06em; margin-bottom:3px; }
+  .guide-section.covered .guide-sec-num { color:#16A34A; }
+  .guide-sec-title { font-size:12px; font-weight:700; color:var(--text-dark); }
+  .guide-sec-sub { font-size:11px; color:var(--text-mid); margin-top:3px; line-height:1.4; }
+
+  /* Action rows */
+  .action-row { display:flex; align-items:flex-start; gap:10px; font-size:12px; color:var(--text-dark); line-height:1.45; }
+  .action-check { width:22px; height:22px; background:var(--dulux-sky); border-radius:50%; color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+
+  /* Mini stats */
+  .mini-stat { background:rgba(255,255,255,0.07); border-radius:8px; padding:14px; }
+
+  /* Demo slide */
+  .demo-inner { flex:1; display:flex; flex-direction:column; padding:40px 52px; justify-content:center; }
+  .demo-badge { display:inline-block; background:var(--aivolve-teal); color:#fff; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:4px 12px; border-radius:4px; width:fit-content; }
+  .prompt-suggestion { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:10px 16px; font-size:13px; color:rgba(255,255,255,0.8); font-style:italic; cursor:default; }
+`;
+
+function buildSlideHTML(slide) {
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${SLIDE_CSS}</style></head><body>${slide.html}</body></html>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// TOC BUILDER
+// ═══════════════════════════════════════════════════════════
+
+let currentSlide = 0;
+const total = SLIDES.length;
+
+function buildTOC() {
+  const container = document.getElementById('toc-list');
+  const sections = {};
+  SLIDES.forEach((s, i) => {
+    if (!sections[s.section]) sections[s.section] = [];
+    sections[s.section].push({ title: s.title, index: i });
+  });
+  let html = '';
+  for (const [section, items] of Object.entries(sections)) {
+    html += `<div class="toc-section"><div class="toc-section-label">${section}</div>`;
+    items.forEach(item => {
+      html += `<button class="toc-item" id="toc-${item.index}" onclick="goToSlide(${item.index})">${item.title}</button>`;
+    });
+    html += '</div>';
+  }
+  container.innerHTML = html;
+}
+
+function updateTOCActive() {
+  document.querySelectorAll('.toc-item').forEach(el => el.classList.remove('active'));
+  const active = document.getElementById(`toc-${currentSlide}`);
+  if (active) active.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════
+
+function renderSlide(index) {
+  const slide = SLIDES[index];
+  const frame = document.getElementById('slide-frame');
+  frame.srcdoc = buildSlideHTML(slide);
+  document.getElementById('notes-content').innerHTML = slide.notes.replace(/\n/g, '<br>');
+  document.getElementById('slide-counter').textContent = `${index + 1} / ${total}`;
+  document.getElementById('btn-prev').disabled = index === 0;
+  document.getElementById('btn-next').disabled = index === total - 1;
+  updateTOCActive();
+}
+
+function nextSlide() {
+  if (currentSlide < total - 1) { currentSlide++; renderSlide(currentSlide); }
+}
+function prevSlide() {
+  if (currentSlide > 0) { currentSlide--; renderSlide(currentSlide); }
+}
+function goToSlide(index) {
+  currentSlide = index;
+  renderSlide(currentSlide);
+  toggleTOC();
+}
+
+// ═══════════════════════════════════════════════════════════
+// NOTES TOGGLE
+// ═══════════════════════════════════════════════════════════
+
+function toggleNotes() {
+  const panel = document.getElementById('notes-panel');
+  const btn = document.getElementById('notes-toggle-btn');
+  panel.classList.toggle('visible');
+  btn.classList.toggle('active');
+  btn.textContent = panel.classList.contains('visible') ? '📋 Hide Notes' : '📋 Speaker Notes';
+}
+
+function toggleTOC() {
+  const overlay = document.getElementById('toc-overlay');
+  overlay.classList.toggle('open');
+  if (overlay.classList.contains('open')) updateTOCActive();
+}
+function closeTOCOutside(e) {
+  if (e.target === document.getElementById('toc-overlay')) toggleTOC();
+}
+
+// ═══════════════════════════════════════════════════════════
+// KEYBOARD NAV
+// ═══════════════════════════════════════════════════════════
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+  if (e.key === 'Escape') {
+    const overlay = document.getElementById('toc-overlay');
+    if (overlay.classList.contains('open')) overlay.classList.remove('open');
+  }
+});
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
+
+buildTOC();
+renderSlide(0);
+</script>
+</body>
+</html>
