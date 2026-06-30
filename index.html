@@ -371,12 +371,12 @@ const SLIDES = [
         <div style="font-size:13px;color:rgba(255,255,255,0.5);">60 minutes</div>
       </div>
     </div>
-    <div style="display:flex;align-items:center;gap:14px;width:fit-content;align-self:center;max-width:50%;overflow:visible;">
-      <div style="width:292px;height:104px;background:#FFFFFF;border-radius:14px;padding:0;box-shadow:0 10px 24px rgba(0,0,0,0.20);display:flex;align-items:center;justify-content:center;line-height:0;overflow:hidden;flex-shrink:0;">
-        <img src="images/dulux_logo.png" alt="Dulux logo" style="height:186px;width:auto;display:block;object-fit:contain;flex-shrink:0;margin-top:-2px;">
+    <div style="display:flex;align-items:center;gap:16px;width:fit-content;align-self:center;max-width:48%;overflow:visible;">
+      <div style="width:245px;height:104px;background:#FFFFFF;border-radius:14px;padding:0;box-shadow:0 10px 24px rgba(0,0,0,0.20);display:flex;align-items:center;justify-content:center;line-height:0;overflow:hidden;flex-shrink:0;">
+        <img src="images/dulux_logo.png" alt="Dulux logo" style="height:186px;width:auto;display:block;object-fit:contain;flex-shrink:0;">
       </div>
-      <div style="width:1px;height:96px;background:rgba(255,255,255,0.28);flex-shrink:0;"></div>
-      <div style="width:292px;height:104px;background:#FFFFFF;border-radius:14px;padding:0;box-shadow:0 10px 24px rgba(0,0,0,0.20);display:flex;align-items:center;justify-content:center;line-height:0;overflow:hidden;flex-shrink:0;">
+      <div style="width:1px;height:92px;background:rgba(255,255,255,0.28);flex-shrink:0;"></div>
+      <div style="width:270px;height:104px;background:#FFFFFF;border-radius:14px;padding:0;box-shadow:0 10px 24px rgba(0,0,0,0.20);display:flex;align-items:center;justify-content:center;line-height:0;overflow:hidden;flex-shrink:0;">
         <img src="images/aivolve_logo.png" alt="AIvolve logo" style="height:88px;width:auto;display:block;object-fit:contain;flex-shrink:0;">
       </div>
     </div>
@@ -754,7 +754,7 @@ const SLIDES = [
 {
   section: "Section 1: Your Google front door",
   title: "What is Google Business Profile",
-  html: `<div class="slide light fit-80 fit-ultra">
+  html: `<div class="slide light fit-78 fit-ultra">
   <div class="slide-inner">
     <div class="eyebrow">Google Business Profile</div>
     <h2 class="slide-h2">This is the screen where<br><span style="color:var(--dulux-sky);">customers decide whether to call you</span></h2>
@@ -992,7 +992,7 @@ const SLIDES = [
 {
   section: "Section 1: Your Google front door",
   title: "Getting reviews",
-  html: `<div class="slide light fit-80 fit-ultra">
+  html: `<div class="slide light fit-82 fit-ultra">
   <div class="slide-inner">
     <div class="eyebrow">Reviews</div>
     <h2 class="slide-h2">Reviews are word-of-mouth<br><span style="color:var(--dulux-sky);">at scale</span></h2>
@@ -1201,7 +1201,7 @@ const SLIDES = [
   section: "Section 2: Proof of work",
   title: "The before/prep/after habit",
   html: `
-<div class="slide light fit-80 fit-ultra">
+<div class="slide light fit-82 fit-ultra">
   <div class="slide-inner">
     <div class="eyebrow">The content habit</div>
     <h2 class="slide-h2">Three photos.<br><span style="color:#2563EB;">Every single job.</span></h2>
@@ -1265,7 +1265,7 @@ const SLIDES = [
   section: "Section 2: Proof of work",
   title: "The four content pillars",
   html: `
-<div class="slide light fit-80 fit-ultra">
+<div class="slide light fit-82 fit-ultra">
   <div class="slide-inner">
     <div class="eyebrow">What to post</div>
     <h2 class="slide-h2">Four content pillars.<br><span style="color:#2563EB;">One post per week minimum.</span></h2>
@@ -1358,7 +1358,7 @@ const SLIDES = [
   section: "Section 2: Proof of work",
   title: "What good looks like: Australia",
   html: `
-<div class="slide light fit-80 fit-ultra">
+<div class="slide light fit-82 fit-ultra">
   <div class="slide-inner">
     <div class="eyebrow">Real examples — Australia</div>
     <h2 class="slide-h2">What good looks like<br><span style="color:#2563EB;">at scale</span></h2>
@@ -1473,7 +1473,7 @@ const SLIDES = [
   section: "Section 2: Proof of work",
   title: "What good looks like: New Zealand",
   html: `
-<div class="slide light fit-80 fit-ultra">
+<div class="slide light fit-82 fit-ultra">
   <div class="slide-inner">
     <div class="eyebrow">Real examples — New Zealand</div>
     <h2 class="slide-h2">What's achievable<br><span style="color:#2563EB;">right here</span></h2>
@@ -2289,14 +2289,20 @@ const SLIDE_CSS = `
     width: 116.3%;
     height: 116.3%;
   }
-  .slide.fit-80 .slide-inner {
-    transform: scale(0.80);
+  .slide.fit-82 .slide-inner {
+    transform: scale(0.82);
     transform-origin: top left;
-    width: 125%;
-    height: 125%;
+    width: 122%;
+    height: 122%;
+  }
+  .slide.fit-78 .slide-inner {
+    transform: scale(0.78);
+    transform-origin: top left;
+    width: 128.3%;
+    height: 128.3%;
   }
   .slide.fit-tight .slide-inner { padding:18px 32px 12px; }
-  .slide.fit-ultra .slide-inner { padding:12px 24px 6px; }
+  .slide.fit-ultra .slide-inner { padding:14px 28px 8px; }
 
   .slide-inner {
     flex:1; display:flex; flex-direction:column;
@@ -2308,7 +2314,7 @@ const SLIDE_CSS = `
 
   .slide-inner > div[style*="grid"] {
     min-height:0;
-    overflow:visible;
+    overflow:hidden;
   }
 
   .slide-h2 {
@@ -2529,45 +2535,7 @@ function buildSlideHTML(slide) {
   return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${SLIDE_CSS}</style></head><body>${slide.html}${fallbackScript}<script>
   (function() {
     var DESIGN_W = 1100, DESIGN_H = 620;
-
-    function autoFitInner() {
-      var slide = document.querySelector('.slide');
-      if (!slide) return;
-      var inner = slide.querySelector('.slide-inner');
-      if (!inner) return;
-
-      // Let us measure true content height rather than a clipped grid height.
-      inner.style.overflow = 'visible';
-      inner.querySelectorAll('div').forEach(function(el) {
-        var st = el.getAttribute('style') || '';
-        if (st.indexOf('overflow:hidden') !== -1 && (slide.classList.contains('fit-80') || slide.classList.contains('fit-86') || slide.classList.contains('fit-88'))) {
-          el.style.overflow = 'visible';
-        }
-      });
-
-      var current = 1;
-      var t = window.getComputedStyle(inner).transform;
-      if (t && t !== 'none') {
-        var m = t.match(/matrix\(([^,]+)/);
-        if (m) current = parseFloat(m[1]) || 1;
-      }
-
-      // Measure unscaled dimensions.
-      var rawH = Math.max(inner.scrollHeight, inner.getBoundingClientRect().height / current);
-      var rawW = Math.max(inner.scrollWidth, inner.getBoundingClientRect().width / current);
-      var fit = Math.min(1, DESIGN_H / rawH, DESIGN_W / rawW);
-      // Do not make slides microscopic; the targeted CSS handles most cases.
-      fit = Math.max(fit, 0.72);
-      if (fit < current || rawH > DESIGN_H + 2 || rawW > DESIGN_W + 2) {
-        inner.style.transformOrigin = 'top left';
-        inner.style.transform = 'scale(' + fit + ')';
-        inner.style.width = (100 / fit) + '%';
-        inner.style.height = (100 / fit) + '%';
-      }
-    }
-
     function scale() {
-      autoFitInner();
       var s = Math.min(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H);
       document.body.style.transform = 'scale(' + s + ')';
       document.body.style.width = DESIGN_W + 'px';
@@ -2575,8 +2543,6 @@ function buildSlideHTML(slide) {
     }
     scale();
     window.addEventListener('resize', scale);
-    window.addEventListener('load', scale);
-    setTimeout(scale, 80);
   })();
 <\/script></body></html>`;
 }
