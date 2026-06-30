@@ -335,22 +335,24 @@ const SLIDES = [
   title: "Title slide",
   html: `
 <div class="slide dark-navy">
-  <div class="slide-inner" style="justify-content:flex-start;align-items:flex-start;gap:0;padding-top:42px;">
-    <div style="display:flex;align-items:center;gap:22px;margin-bottom:32px;background:#fff;border-radius:16px;padding:18px 24px;box-shadow:0 14px 34px rgba(0,0,0,0.24);width:fit-content;">
-      <img src="images/dulux_logo.png" alt="Dulux logo" style="height:58px;width:auto;display:block;object-fit:contain;">
-      <div style="width:1px;height:48px;background:#E5E7EB;"></div>
-      <img src="images/aivolve_logo.png" alt="AIvolve logo" style="height:46px;width:auto;display:block;object-fit:contain;">
+  <div class="slide-inner" style="justify-content:space-between;align-items:flex-start;gap:0;padding-top:42px;">
+    <div>
+      <div style="margin-bottom:18px;display:flex;align-items:center;gap:10px;">
+        <div class="pill red">Dulux Accredited Painter Workshop</div>
+        <div class="pill teal">AIvolve</div>
+      </div>
+      <h1 style="font-size:clamp(28px,4.5vw,52px);font-weight:900;line-height:1.1;color:#fff;max-width:700px;">How to market<br><span style="color:#00A9CE;">your painting<br>business</span></h1>
+      <p style="margin-top:24px;font-size:16px;color:rgba(255,255,255,0.6);max-width:520px;line-height:1.6;">Practical digital marketing and AI strategies you can use from tomorrow. No jargon. No fluff. Just what works for NZ painters right now.</p>
+      <div style="margin-top:36px;display:flex;align-items:center;gap:20px;">
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);">Presented by <strong style="color:#fff;">Patrick Dodd</strong></div>
+        <div style="width:1px;height:16px;background:rgba(255,255,255,0.2);"></div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);">60 minutes</div>
+      </div>
     </div>
-    <div style="margin-bottom:18px;display:flex;align-items:center;gap:10px;">
-      <div class="pill red">Dulux Accredited Painter Workshop</div>
-      <div class="pill teal">AIvolve</div>
-    </div>
-    <h1 style="font-size:clamp(28px,4.5vw,52px);font-weight:900;line-height:1.1;color:#fff;max-width:700px;">How to market<br><span style="color:#00A9CE;">your painting<br>business</span></h1>
-    <p style="margin-top:24px;font-size:16px;color:rgba(255,255,255,0.6);max-width:520px;line-height:1.6;">Practical digital marketing and AI strategies you can use from tomorrow. No jargon. No fluff. Just what works for NZ painters right now.</p>
-    <div style="margin-top:36px;display:flex;align-items:center;gap:20px;">
-      <div style="font-size:13px;color:rgba(255,255,255,0.5);">Presented by <strong style="color:#fff;">Patrick Dodd</strong></div>
-      <div style="width:1px;height:16px;background:rgba(255,255,255,0.2);"></div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.5);">60 minutes</div>
+    <div style="display:flex;align-items:center;gap:36px;background:#fff;border-radius:18px;padding:28px 44px;box-shadow:0 14px 34px rgba(0,0,0,0.24);width:fit-content;align-self:center;">
+      <img src="images/dulux_logo.png" alt="Dulux logo" style="height:110px;width:auto;display:block;object-fit:contain;">
+      <div style="width:2px;height:90px;background:#E5E7EB;"></div>
+      <img src="images/aivolve_logo.png" alt="AIvolve logo" style="height:88px;width:auto;display:block;object-fit:contain;">
     </div>
   </div>
   <div class="slide-accent-bar"></div>
@@ -2236,7 +2238,37 @@ const SLIDE_CSS = `
 `;
 
 function buildSlideHTML(slide) {
-  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${SLIDE_CSS}</style></head><body>${slide.html}</body></html>`;
+  const fallbackScript = `
+    <script>
+      function applyFallback(img) {
+        if (img.dataset.fallbackApplied) return;
+        img.dataset.fallbackApplied = 'true';
+        const box = document.createElement('div');
+        box.style.cssText = img.getAttribute('style') || '';
+        box.style.display = 'flex';
+        box.style.alignItems = 'center';
+        box.style.justifyContent = 'center';
+        box.style.background = 'repeating-linear-gradient(45deg,#EEF0F3,#EEF0F3 10px,#E5E7EB 10px,#E5E7EB 20px)';
+        box.style.border = '1.5px dashed #B8BEC8';
+        box.style.borderRadius = '6px';
+        box.style.color = '#6B7280';
+        box.style.fontSize = '10px';
+        box.style.fontFamily = 'Inter, sans-serif';
+        box.style.padding = '6px 10px';
+        box.style.textAlign = 'center';
+        box.style.boxSizing = 'border-box';
+        box.innerHTML = '<span>' + (img.alt || 'Image') + '<br><span style="font-family:Courier New,monospace;font-size:9px;opacity:0.8;">' + img.getAttribute('src') + '</span></span>';
+        img.parentNode.replaceChild(box, img);
+      }
+      document.querySelectorAll('img').forEach(function(img) {
+        if (img.complete) {
+          if (img.naturalWidth === 0) applyFallback(img);
+        } else {
+          img.addEventListener('error', function() { applyFallback(img); });
+        }
+      });
+    <\/script>`;
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${SLIDE_CSS}</style></head><body>${slide.html}${fallbackScript}</body></html>`;
 }
 
 // ═══════════════════════════════════════════════════════════
