@@ -283,7 +283,7 @@
   <div id="topbar">
     <button class="toc-btn" onclick="toggleTOC()">&#9776; Contents</button>
     <div class="brand-bar">
-      <span class="brand-label">Dulux Accredited Painter Workshop</span>
+      <img src="images/dulux_logo.png" alt="Dulux" style="height:26px;width:auto;display:block;object-fit:contain;" onerror="this.outerHTML='<span class=&quot;brand-label&quot;>Dulux Accredited Painter Workshop</span>';">
       <div class="brand-divider"></div>
       <span class="brand-aivolve">AIvolve</span>
     </div>
@@ -322,6 +322,25 @@
 </div>
 
 <script>
+// ═══════════════════════════════════════════════════════════
+// QR BADGE HELPER
+// A small, consistent floating badge used on the Daz-related slides so
+// the audience can scan to open Daz on their own phone at any point.
+// Drop the real file at images/Daz_GPT.png and it appears automatically;
+// until then a clean placeholder box shows instead.
+// ═══════════════════════════════════════════════════════════
+
+function qrBadge() {
+  return `
+  <div style="position:absolute;bottom:18px;right:18px;z-index:5;background:rgba(255,255,255,0.97);border-radius:14px;padding:10px 12px;box-shadow:0 10px 26px rgba(0,0,0,0.28);display:flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,0.5);">
+    <img src="images/Daz_GPT.png" alt="Scan to open Daz" style="width:58px;height:58px;object-fit:contain;border-radius:6px;flex-shrink:0;">
+    <div style="text-align:left;">
+      <div style="font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#6B7280;">Scan for</div>
+      <div style="font-size:13px;font-weight:900;color:#0F172A;line-height:1.2;">Daz</div>
+    </div>
+  </div>`;
+}
+
 // ═══════════════════════════════════════════════════════════
 // SLIDE DATA
 // Each slide: { section, title, html, notes }
@@ -626,8 +645,9 @@ const SLIDES = [
       </div>
     </div>
   </div>
+  ${qrBadge()}
 </div>`,
-  notes: `Spend a moment here so people understand the two things they're taking home. The Dulux Marketing Offsider is the written guide — 17 sections covering every aspect of digital marketing for NZ painters. Daz is the custom GPT built on top of it. Instead of reading the guide, they can just ask Daz a question and get the relevant answer directly.\n\nIt is NOT magic. It's a writing assistant that knows NZ painting businesses well. The value is that it saves them time on tasks they'd otherwise avoid doing.\n\nIf someone asks what it costs: Daz is free to access with a ChatGPT account. The Dulux Marketing Offsider guide PDF is also free.\n\nNote for presenter: make sure the Daz tab is open in your browser before the session starts.`
+  notes: `Spend a moment here so people understand the two things they're taking home. The Dulux Marketing Offsider is the written guide — 17 sections covering every aspect of digital marketing for NZ painters. Daz is the custom GPT built on top of it. Instead of reading the guide, they can just ask Daz a question and get the relevant answer directly.\n\nIt is NOT magic. It's a writing assistant that knows NZ painting businesses well. The value is that it saves them time on tasks they'd otherwise avoid doing.\n\nIf someone asks what it costs: Daz is free to access with a ChatGPT account. The Dulux Marketing Offsider guide PDF is also free.\n\nNote for presenter: make sure the Daz tab is open in your browser before the session starts.\n\nThe QR code in the bottom-right corner links straight to Daz — mention it once here so people know it's there if they want to follow along on their own phone.`
 },
 
 // ── SECTION 1: GOOGLE ──────────────────────────────────────
@@ -1100,6 +1120,7 @@ const SLIDES = [
       </div>
     </div>
   </div>
+  ${qrBadge()}
 </div>`,
   notes: `Open Daz now. Take 2-3 questions from the room. Type each question in exactly as someone says it — no polishing — so they see how natural language queries work.\n\nIf the room is quiet, use one of the prompt suggestions on the slide.\n\nAfter 2-3 questions, wrap up and move on. The goal is to show it works and build confidence, not to cover everything.\n\nTiming check: you should be at approximately 17 minutes.`
 },
@@ -1506,6 +1527,7 @@ const SLIDES = [
       <div class="prompt-suggestion">"What hashtags should I use for a painting post in Wellington?"</div>
     </div>
   </div>
+  ${qrBadge()}
 </div>`,
   notes: `Take 2-3 questions or job descriptions from the room. Type each one naturally into Daz. Let people see the output.\n\nGood follow-up prompt if the first response is too generic: "Make it sound more like a local NZ tradesperson — plain, direct language, no corporate phrases."\n\nIf someone gives you a real job description (exterior repaint, specific suburb), even better — it shows the tool can personalise to their actual work.\n\nTiming check: you should be at approximately 29 minutes.`
 },
@@ -1655,6 +1677,7 @@ const SLIDES = [
       <div class="prompt-suggestion">"Write a polite message to a customer who keeps changing the scope"</div>
     </div>
   </div>
+  ${qrBadge()}
 </div>`,
   notes: `Take 2-3 real situations from the room. The review response and quote follow-up are the two most universally useful prompts — most painters will relate to both.\n\nIf someone gives you a genuinely specific situation ("I had a customer leave a one-star review saying I didn't show up but I did show up"), put it in exactly as they describe it. The specificity will produce a better response and show the tool's capability.\n\nTiming check: you should be at approximately 39 minutes.`
 },
@@ -1778,6 +1801,7 @@ const SLIDES = [
       <div class="prompt-suggestion">"Write me a post-job thank you email"</div>
     </div>
   </div>
+  ${qrBadge()}
 </div>`,
   notes: `Final demo slot. Take whatever questions come from the room — by this point people should be more comfortable asking.\n\nIf the group is quiet, use the "should I run Facebook ads or Google Ads?" prompt — Daz's decision tree response is a good example of how it handles nuanced questions.\n\nTiming check: you should be at approximately 47 minutes. Start wrapping toward the closing section.`
 },
@@ -2243,21 +2267,35 @@ function buildSlideHTML(slide) {
       function applyFallback(img) {
         if (img.dataset.fallbackApplied) return;
         img.dataset.fallbackApplied = 'true';
+        const styleH = parseInt(img.style.height) || 0;
+        const styleW = parseInt(img.style.width) || 0;
+        const rect = img.getBoundingClientRect();
+        const h = styleH || rect.height || 80;
+        const w = styleW || rect.width || h; // width:auto images: fall back to height as proxy
+        const isSmall = h < 90 && w < 90;
         const box = document.createElement('div');
         box.style.cssText = img.getAttribute('style') || '';
         box.style.display = 'flex';
+        box.style.flexDirection = 'column';
         box.style.alignItems = 'center';
         box.style.justifyContent = 'center';
         box.style.background = 'repeating-linear-gradient(45deg,#EEF0F3,#EEF0F3 10px,#E5E7EB 10px,#E5E7EB 20px)';
         box.style.border = '1.5px dashed #B8BEC8';
-        box.style.borderRadius = '6px';
+        box.style.borderRadius = isSmall ? '6px' : '8px';
         box.style.color = '#6B7280';
-        box.style.fontSize = '10px';
         box.style.fontFamily = 'Inter, sans-serif';
-        box.style.padding = '6px 10px';
         box.style.textAlign = 'center';
         box.style.boxSizing = 'border-box';
-        box.innerHTML = '<span>' + (img.alt || 'Image') + '<br><span style="font-family:Courier New,monospace;font-size:9px;opacity:0.8;">' + img.getAttribute('src') + '</span></span>';
+        box.style.overflow = 'hidden';
+        box.style.lineHeight = '1.3';
+        box.style.padding = isSmall ? '2px' : '6px 10px';
+        box.style.fontSize = isSmall ? '8px' : '10px';
+        if (isSmall) {
+          box.innerHTML = '<span style="font-size:14px;">🖼️</span>';
+          box.title = (img.alt || 'Image') + ' — ' + img.getAttribute('src');
+        } else {
+          box.innerHTML = '<span>' + (img.alt || 'Image') + '<br><span style="font-family:Courier New,monospace;font-size:9px;opacity:0.8;word-break:break-all;">' + img.getAttribute('src') + '</span></span>';
+        }
         img.parentNode.replaceChild(box, img);
       }
       document.querySelectorAll('img').forEach(function(img) {
