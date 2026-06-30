@@ -371,10 +371,10 @@ const SLIDES = [
         <div style="font-size:13px;color:rgba(255,255,255,0.5);">60 minutes</div>
       </div>
     </div>
-    <div style="display:flex;align-items:center;gap:36px;background:#fff;border-radius:18px;padding:28px 44px;box-shadow:0 14px 34px rgba(0,0,0,0.24);width:fit-content;align-self:center;">
-      <img src="images/dulux_logo.png" alt="Dulux logo" style="height:190px;width:auto;display:block;object-fit:contain;">
-      <div style="width:2px;height:160px;background:#E5E7EB;"></div>
-      <img src="images/aivolve_logo.png" alt="AIvolve logo" style="height:88px;width:auto;display:block;object-fit:contain;">
+    <div style="display:flex;align-items:center;gap:24px;background:#fff;border-radius:16px;padding:18px 28px;box-shadow:0 12px 28px rgba(0,0,0,0.22);width:fit-content;align-self:center;max-width:94%;overflow:hidden;">
+      <img src="images/dulux_logo.png" alt="Dulux logo" style="height:190px;width:auto;display:block;object-fit:contain;flex-shrink:0;">
+      <div style="width:2px;height:132px;background:#E5E7EB;flex-shrink:0;"></div>
+      <img src="images/aivolve_logo.png" alt="AIvolve logo" style="height:88px;width:auto;display:block;object-fit:contain;flex-shrink:0;">
     </div>
   </div>
   <div class="slide-accent-bar"></div>
@@ -750,7 +750,7 @@ const SLIDES = [
 {
   section: "Section 1: Your Google front door",
   title: "What is Google Business Profile",
-  html: `<div class="slide light">
+  html: `<div class="slide light fit-94 fit-tight">
   <div class="slide-inner">
     <div class="eyebrow">Google Business Profile</div>
     <h2 class="slide-h2">This is the screen where<br><span style="color:var(--dulux-sky);">customers decide whether to call you</span></h2>
@@ -881,7 +881,7 @@ const SLIDES = [
 {
   section: "Section 1: Your Google front door",
   title: "The priority ladder",
-  html: `<div class="slide light">
+  html: `<div class="slide light fit-94 fit-tight">
   <div class="slide-inner">
     <div class="eyebrow">Where to start</div>
     <h2 class="slide-h2">The priority ladder</h2>
@@ -988,7 +988,7 @@ const SLIDES = [
 {
   section: "Section 1: Your Google front door",
   title: "Getting reviews",
-  html: `<div class="slide light">
+  html: `<div class="slide light fit-94 fit-tight">
   <div class="slide-inner">
     <div class="eyebrow">Reviews</div>
     <h2 class="slide-h2">Reviews are word-of-mouth<br><span style="color:var(--dulux-sky);">at scale</span></h2>
@@ -1197,7 +1197,7 @@ const SLIDES = [
   section: "Section 2: Proof of work",
   title: "The before/prep/after habit",
   html: `
-<div class="slide light">
+<div class="slide light fit-94 fit-tight">
   <div class="slide-inner">
     <div class="eyebrow">The content habit</div>
     <h2 class="slide-h2">Three photos.<br><span style="color:#2563EB;">Every single job.</span></h2>
@@ -1261,7 +1261,7 @@ const SLIDES = [
   section: "Section 2: Proof of work",
   title: "The four content pillars",
   html: `
-<div class="slide light">
+<div class="slide light fit-94 fit-tight">
   <div class="slide-inner">
     <div class="eyebrow">What to post</div>
     <h2 class="slide-h2">Four content pillars.<br><span style="color:#2563EB;">One post per week minimum.</span></h2>
@@ -1354,7 +1354,7 @@ const SLIDES = [
   section: "Section 2: Proof of work",
   title: "What good looks like: Australia",
   html: `
-<div class="slide light">
+<div class="slide light fit-91 fit-tight">
   <div class="slide-inner">
     <div class="eyebrow">Real examples — Australia</div>
     <h2 class="slide-h2">What good looks like<br><span style="color:#2563EB;">at scale</span></h2>
@@ -1693,7 +1693,7 @@ const SLIDES = [
   section: "Section 3: AI as your admin offsider",
   title: "AI for missed calls",
   html: `
-<div class="slide light">
+<div class="slide light fit-91 fit-tight">
   <div class="slide-inner">
     <div class="eyebrow">Never miss a lead</div>
     <h2 class="slide-h2">A missed call is<br><span style="color:var(--aivolve-teal);">a missed job</span></h2>
@@ -2258,6 +2258,22 @@ const SLIDE_CSS = `
   .slide.light { background:#F7F8FA; }
   .slide.dark-navy { background:var(--dulux-navy); }
   .slide.dark-teal { background:linear-gradient(135deg,#003D35,#005A4F); }
+
+  /* Targeted overflow insurance for dense slides.
+     Backgrounds stay full-size; only the content layer is scaled slightly. */
+  .slide.fit-94 .slide-inner {
+    transform: scale(0.94);
+    transform-origin: top left;
+    width: 106.4%;
+    height: 106.4%;
+  }
+  .slide.fit-91 .slide-inner {
+    transform: scale(0.91);
+    transform-origin: top left;
+    width: 109.9%;
+    height: 109.9%;
+  }
+  .slide.fit-tight .slide-inner { padding:18px 32px 12px; }
 
   .slide-inner {
     flex:1; display:flex; flex-direction:column;
