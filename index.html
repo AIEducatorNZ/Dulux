@@ -372,11 +372,11 @@ const SLIDES = [
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:16px;width:fit-content;align-self:center;max-width:48%;overflow:visible;">
-      <div style="background:#FFFFFF;border-radius:14px;padding:8px 12px;box-shadow:0 10px 24px rgba(0,0,0,0.20);display:flex;align-items:center;justify-content:center;line-height:0;">
+      <div style="width:330px;height:120px;background:#FFFFFF;border-radius:14px;padding:0;box-shadow:0 10px 24px rgba(0,0,0,0.20);display:flex;align-items:center;justify-content:center;line-height:0;overflow:hidden;flex-shrink:0;">
         <img src="images/dulux_logo.png" alt="Dulux logo" style="height:190px;width:auto;display:block;object-fit:contain;flex-shrink:0;">
       </div>
-      <div style="width:1px;height:110px;background:rgba(255,255,255,0.28);flex-shrink:0;"></div>
-      <div style="background:#FFFFFF;border-radius:14px;padding:10px 14px;box-shadow:0 10px 24px rgba(0,0,0,0.20);display:flex;align-items:center;justify-content:center;line-height:0;">
+      <div style="width:1px;height:104px;background:rgba(255,255,255,0.28);flex-shrink:0;"></div>
+      <div style="width:290px;height:120px;background:#FFFFFF;border-radius:14px;padding:0;box-shadow:0 10px 24px rgba(0,0,0,0.20);display:flex;align-items:center;justify-content:center;line-height:0;overflow:hidden;flex-shrink:0;">
         <img src="images/aivolve_logo.png" alt="AIvolve logo" style="height:88px;width:auto;display:block;object-fit:contain;flex-shrink:0;">
       </div>
     </div>
@@ -754,7 +754,7 @@ const SLIDES = [
 {
   section: "Section 1: Your Google front door",
   title: "What is Google Business Profile",
-  html: `<div class="slide light fit-94 fit-tight">
+  html: `<div class="slide light fit-88 fit-ultra">
   <div class="slide-inner">
     <div class="eyebrow">Google Business Profile</div>
     <h2 class="slide-h2">This is the screen where<br><span style="color:var(--dulux-sky);">customers decide whether to call you</span></h2>
@@ -992,7 +992,7 @@ const SLIDES = [
 {
   section: "Section 1: Your Google front door",
   title: "Getting reviews",
-  html: `<div class="slide light fit-94 fit-tight">
+  html: `<div class="slide light fit-88 fit-ultra">
   <div class="slide-inner">
     <div class="eyebrow">Reviews</div>
     <h2 class="slide-h2">Reviews are word-of-mouth<br><span style="color:var(--dulux-sky);">at scale</span></h2>
@@ -1201,7 +1201,7 @@ const SLIDES = [
   section: "Section 2: Proof of work",
   title: "The before/prep/after habit",
   html: `
-<div class="slide light fit-94 fit-tight">
+<div class="slide light fit-88 fit-ultra">
   <div class="slide-inner">
     <div class="eyebrow">The content habit</div>
     <h2 class="slide-h2">Three photos.<br><span style="color:#2563EB;">Every single job.</span></h2>
@@ -1265,7 +1265,7 @@ const SLIDES = [
   section: "Section 2: Proof of work",
   title: "The four content pillars",
   html: `
-<div class="slide light fit-94 fit-tight">
+<div class="slide light fit-88 fit-ultra">
   <div class="slide-inner">
     <div class="eyebrow">What to post</div>
     <h2 class="slide-h2">Four content pillars.<br><span style="color:#2563EB;">One post per week minimum.</span></h2>
@@ -1358,7 +1358,7 @@ const SLIDES = [
   section: "Section 2: Proof of work",
   title: "What good looks like: Australia",
   html: `
-<div class="slide light fit-91 fit-tight">
+<div class="slide light fit-86 fit-ultra">
   <div class="slide-inner">
     <div class="eyebrow">Real examples — Australia</div>
     <h2 class="slide-h2">What good looks like<br><span style="color:#2563EB;">at scale</span></h2>
@@ -1473,7 +1473,7 @@ const SLIDES = [
   section: "Section 2: Proof of work",
   title: "What good looks like: New Zealand",
   html: `
-<div class="slide light">
+<div class="slide light fit-86 fit-ultra">
   <div class="slide-inner">
     <div class="eyebrow">Real examples — New Zealand</div>
     <h2 class="slide-h2">What's achievable<br><span style="color:#2563EB;">right here</span></h2>
@@ -1574,7 +1574,7 @@ const SLIDES = [
       </div>
       <div style="padding:7px 10px;border-radius:999px;background:#FFFFFF;border:1px solid #FED7AA;font-size:11px;font-weight:800;color:#9A3412;white-space:nowrap;">Achievable scale</div>
     </div>
-    <p style="margin-top:10px;font-size:11px;color:#9CA3AF;">Follower counts approximate as of the underlying research. Verify handles before presenting live.</p>
+    <p style="margin-top:10px;font-size:11px;color:#9CA3AF;">Follower counts are approximate. Verify handles before presenting live.</p>
   </div>
 </div>`,
   notes: `This slide resets expectations in a healthy way. NZ trade painters have realistic follower counts in the hundreds to low thousands. The point is not reach — it's content quality and consistency.\n\nThe House Painters (@thehousepaintersnz, Auckland) is the standout for educational content: they explain when to strip versus repaint, and use "get the look" posts to walk through colour palette choices. With 758 posts, their consistency is exceptional. Master Painters Gold Award status adds credibility.\n\nAtlantis Painting Services (@atlantispaintingservices, Auckland) is the standout for visual proof of work: strong before-and-after reels and carousels, plus smart use of Instagram story highlights to turn client testimonials into a permanent, browsable portfolio. They name specific Auckland suburbs (e.g. Mount Eden) in posts, which helps with local search relevance too.\n\nBoth accounts post 2-3 times per week — frame this as the practical minimum cadence rather than something to feel daunting about. Consistency beats frequency.\n\nIf someone asks about other strong examples: Auckland City Painters (Gold Award winners, good suburb-tagging) and Euro Painters Auckland (20+ years experience, clear service listing) were both close contenders worth mentioning.`
@@ -2277,7 +2277,20 @@ const SLIDE_CSS = `
     width: 109.9%;
     height: 109.9%;
   }
+  .slide.fit-88 .slide-inner {
+    transform: scale(0.88);
+    transform-origin: top left;
+    width: 113.7%;
+    height: 113.7%;
+  }
+  .slide.fit-86 .slide-inner {
+    transform: scale(0.86);
+    transform-origin: top left;
+    width: 116.3%;
+    height: 116.3%;
+  }
   .slide.fit-tight .slide-inner { padding:18px 32px 12px; }
+  .slide.fit-ultra .slide-inner { padding:14px 28px 8px; }
 
   .slide-inner {
     flex:1; display:flex; flex-direction:column;
