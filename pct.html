@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Market Your Business — PainterCraft Trust Session</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --dulux-navy:   #1B2A4A;
+    --dulux-red:    #C8102E;
+    --dulux-sky:    #00A9CE;
+    --aivolve-teal: #00C2A0;
+    --white:        #FFFFFF;
+    --text-dark:    #111827;
+    --text-mid:     #374151;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: #0D1117;
+    color: var(--text-dark);
+    overflow: hidden;
+  }
+
+  #app { display: flex; flex-direction: column; height: 100vh; }
+
+  #topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--dulux-navy); padding: 0 20px; height: 44px;
+    flex-shrink: 0; gap: 12px;
+  }
+  #topbar .toc-btn {
+    background: none; border: 1px solid rgba(255,255,255,0.25); color: #fff;
+    font-size: 12px; font-weight: 600; letter-spacing: .05em;
+    padding: 4px 12px; border-radius: 4px; cursor: pointer; white-space: nowrap;
+  }
+  #topbar .toc-btn:hover { background: rgba(255,255,255,0.1); }
+  #slide-counter { color: rgba(255,255,255,0.55); font-size: 12px; font-weight: 500; white-space: nowrap; }
+  #topbar .brand-bar { display: flex; align-items: center; gap: 14px; flex: 1; justify-content: center; }
+  .brand-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.25); }
+  .brand-label { color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+  .brand-aivolve { color: var(--aivolve-teal); font-size: 13px; font-weight: 800; letter-spacing: .06em; }
+
+  #main {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    overflow: hidden; padding: 12px 16px 0; gap: 10px; min-height: 0;
+  }
+
+  #slide-viewport {
+    width: 100%;
+    max-width: calc((100vh - 44px - 52px) * (1100 / 620));
+    position: relative; flex-shrink: 0; align-self: center;
+  }
+  #slide-viewport iframe {
+    display: block; width: 100%; aspect-ratio: 1100 / 620;
+    border: none; border-radius: 8px; box-shadow: 0 4px 32px rgba(0,0,0,0.5);
+  }
+
+  #notes-panel {
+    width: 100%; max-width: 1100px; background: #1A1F2B; border-radius: 8px;
+    padding: 14px 20px; overflow-y: auto; height: 170px; flex-shrink: 0; display: none;
+  }
+  #notes-panel.visible { display: block; }
+  #notes-panel .notes-label {
+    font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--aivolve-teal); margin-bottom: 8px;
+  }
+  #notes-content { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.75); }
+
+  #notes-toggle-btn {
+    background: none; border: 1px solid rgba(255,255,255,0.25); color: #fff;
+    font-size: 12px; font-weight: 600; letter-spacing: .05em; padding: 4px 12px;
+    border-radius: 4px; cursor: pointer; white-space: nowrap; transition: background .15s;
+  }
+  #notes-toggle-btn:hover { background: rgba(255,255,255,0.1); }
+  #notes-toggle-btn.active { background: var(--aivolve-teal); border-color: var(--aivolve-teal); color: #fff; }
+
+  #bottomnav { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 10px 0 12px; flex-shrink: 0; }
+  .nav-btn {
+    background: #1A1F2B; border: 1px solid rgba(255,255,255,0.12); color: #fff;
+    font-size: 13px; font-weight: 600; padding: 8px 22px; border-radius: 6px;
+    cursor: pointer; transition: background .15s;
+  }
+  .nav-btn:hover { background: #252C3A; }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .nav-btn.primary { background: var(--dulux-red); border-color: var(--dulux-red); }
+  .nav-btn.primary:hover { background: #a80e26; }
+
+  #toc-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 100; align-items: center; justify-content: center; }
+  #toc-overlay.open { display: flex; }
+  #toc-box { background: #1A1F2B; border-radius: 12px; padding: 28px 32px; width: 480px; max-height: 80vh; overflow-y: auto; box-shadow: 0 8px 48px rgba(0,0,0,0.6); }
+  #toc-box h2 { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+  .toc-section { margin-bottom: 14px; }
+  .toc-section-label { font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--aivolve-teal); margin-bottom: 6px; }
+  .toc-item {
+    display: block; width: 100%; text-align: left; background: none; border: none;
+    color: rgba(255,255,255,0.75); font-size: 13px; padding: 7px 8px; border-radius: 6px; cursor: pointer;
+  }
+  .toc-item:hover { background: rgba(255,255,255,0.06); }
+  .toc-item.active { background: rgba(0,194,160,0.15); color: #fff; font-weight: 700; }
+  .toc-close {
+    margin-top: 10px; width: 100%; background: rgba(255,255,255,0.08); border: none; color: #fff;
+    padding: 8px; border-radius: 6px; cursor: pointer; font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <div id="topbar">
+    <button class="toc-btn" onclick="toggleTOC()">&#9776; Contents</button>
+    <div class="brand-bar">
+      <span class="brand-label">Dulux</span>
+      <div class="brand-divider"></div>
+      <span class="brand-label" style="font-weight:600;opacity:0.85;">PainterCraft Trust Course</span>
+      <div class="brand-divider"></div>
+      <span class="brand-aivolve">AIvolve</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button id="notes-toggle-btn" onclick="toggleNotes()">&#128203; Speaker Notes</button>
+      <span id="slide-counter">1 / 22</span>
+    </div>
+  </div>
+
+  <div id="main">
+    <div id="slide-viewport">
+      <iframe id="slide-frame" src="about:blank"></iframe>
+    </div>
+    <div id="notes-panel">
+      <div class="notes-label">Speaker notes</div>
+      <div id="notes-content">Loading...</div>
+    </div>
+  </div>
+
+  <div id="bottomnav">
+    <button class="nav-btn" id="btn-prev" onclick="prevSlide()" disabled>&#8592; Back</button>
+    <button class="nav-btn primary" id="btn-next" onclick="nextSlide()">Next &#8594;</button>
+  </div>
+
+</div>
+
+<div id="toc-overlay" onclick="closeTOCOutside(event)">
+  <div id="toc-box">
+    <h2>Session contents</h2>
+    <div id="toc-list"></div>
+    <button class="toc-close" onclick="toggleTOC()">Close</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// SLIDE DATA
+// Each slide: { section, title, html, notes }
+// Design brief for this deck: PCT audience is earlier-career than the
+// DAP crowd, so every slide favours a single big idea over multiple
+// points, with noticeably larger type than the DAP deck and far less
+// text per screen.
+// ═══════════════════════════════════════════════════════════
+
+const SLIDES = [
+
+// ── OPENING ──────────────────────────────────────────────────
+{
+  section: "Opening",
+  title: "Title slide",
+  html: `<div class="slide dark-navy" style="position:relative;overflow:hidden;background:radial-gradient(circle at 80% 15%,rgba(0,169,206,0.22),transparent 32%),linear-gradient(135deg,#14233F 0%,#1B2A4A 60%,#101B31 100%);">
+    <div class="slide-inner" style="justify-content:center;align-items:flex-start;padding:70px 80px;">
+      <div style="font-size:18px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#9BE7F0;">PainterCraft Trust &nbsp;|&nbsp; 16 July 2026</div>
+      <h1 style="font-size:clamp(56px,7.2vw,92px);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-0.02em;margin-top:22px;">How to market<br>your business</h1>
+      <p style="font-size:28px;color:rgba(255,255,255,0.8);margin-top:26px;max-width:640px;line-height:1.5;">A practical session for painters starting out.</p>
+      <div style="margin-top:48px;display:flex;align-items:center;gap:16px;">
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#00A9CE,#00C2A0);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:26px;">PD</div>
+        <div>
+          <div style="font-size:23px;font-weight:800;color:#fff;">Patrick Dodd</div>
+          <div style="font-size:18px;color:rgba(255,255,255,0.65);">Co-founder, AIvolve</div>
+        </div>
+      </div>
+    </div>
+  </div>`,
+  notes: `Quick personal introduction. Keep it short, mention teaching background and AIvolve, then move straight into the session rather than lingering on credentials.`
+},
+
+{
+  section: "Opening",
+  title: "Why this matters now",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="justify-content:center;padding:70px 90px;">
+      <div class="eyebrow">Before we start</div>
+      <h2 style="font-size:clamp(40px,5.4vw,60px);font-weight:900;color:var(--text-dark);line-height:1.15;">Marketing is not<br>something you do later</h2>
+      <p style="font-size:28px;color:var(--text-mid);margin-top:28px;max-width:680px;line-height:1.55;">The habits you start now are cheap. Fixing the gaps later is expensive.</p>
+      <div style="margin-top:36px;display:inline-flex;align-items:center;gap:14px;background:#F0FDF4;border-radius:14px;padding:16px 22px;">
+        <span style="font-size:30px;">💸</span>
+        <span style="font-size:24px;font-weight:800;color:#065F46;">Nothing in this session costs money.</span>
+      </div>
+    </div>
+  </div>`,
+  notes: `Open with a question to the room, something like who here got their last job through word of mouth. Most hands will go up. That is the hook. Word of mouth works, but it is unpredictable, and the point of this session is to make it a bit more predictable without spending a cent.`
+},
+
+{
+  section: "Opening",
+  title: "The market is tighter, the opportunity is real",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="justify-content:center;padding:60px 90px;">
+      <div class="eyebrow">Why this matters now</div>
+      <h2 style="font-size:clamp(36px,4.8vw,50px);font-weight:800;color:var(--text-dark);line-height:1.25;">The market is tighter.<br>The opportunity is real.</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-top:34px;">
+        <div style="text-align:center;">
+          <div style="font-size:clamp(48px,6.4vw,70px);font-weight:900;color:var(--dulux-sky);line-height:1;">5,832</div>
+          <div style="font-size:21px;color:var(--text-mid);margin-top:10px;line-height:1.4;">painting businesses in NZ, all competing for the same work</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:clamp(48px,6.4vw,70px);font-weight:900;color:var(--dulux-red);line-height:1;">~40%</div>
+          <div style="font-size:21px;color:var(--text-mid);margin-top:10px;line-height:1.4;">of NZ businesses market themselves online at all</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:clamp(48px,6.4vw,70px);font-weight:900;color:var(--aivolve-teal);line-height:1;">~45%</div>
+          <div style="font-size:21px;color:var(--text-mid);margin-top:10px;line-height:1.4;">of home service businesses have a verified Google listing</div>
+        </div>
+      </div>
+      <div style="margin-top:32px;background:linear-gradient(90deg,#162643,#233859 68%,#00A9CE);border-radius:14px;padding:20px 26px;">
+        <div style="font-size:23px;font-weight:700;color:#fff;line-height:1.5;">Most of your competition is not showing up online. That is the opening.</div>
+      </div>
+    </div>
+  </div>`,
+  notes: `Adapted from the equivalent slide in the DAP deck, since this is general market context rather than DAP-specific toolkit content, so it is fair to reuse here. The figures are approximate and drawn from the underlying research report: the 5,832 figure and the 40% figure trace to MBIE's Business Digital Capability Monitor and the CPA Australia Asia-Pacific Small Business Survey (2024-25), and the 45% figure traces to Birdeye's 2025 home services data, which is a global rather than NZ-specific dataset. Worth a quick check closer to the day that nothing more current has surfaced given these are 2024 and 2025 figures being used for a mid-2026 session. The point to land verbally: painters doing even a few of these things well tend to stand out, not because they are exceptional, but because so much of the competition is not showing up online at all.`
+},
+
+{
+  section: "Opening",
+  title: "What we're covering today",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="padding:52px 80px;">
+      <div class="eyebrow">Today's session</div>
+      <h2 style="font-size:clamp(36px,4.8vw,50px);font-weight:800;color:var(--text-dark);line-height:1.2;">Four things that will<br>move your business forward</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px;flex:1;">
+        <div style="background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 2px 12px rgba(0,0,0,0.06);display:flex;align-items:flex-start;gap:14px;">
+          <div style="width:38px;height:38px;border-radius:10px;background:#E6F6FB;color:#00A9CE;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+          <div>
+            <div style="font-size:20px;font-weight:800;color:var(--text-dark);line-height:1.3;">Your Google front door</div>
+            <div style="font-size:16px;color:var(--text-mid);margin-top:4px;line-height:1.4;">Your profile and getting reviews</div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 2px 12px rgba(0,0,0,0.06);display:flex;align-items:flex-start;gap:14px;">
+          <div style="width:38px;height:38px;border-radius:10px;background:#EFF6FF;color:#2563EB;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+          <div>
+            <div style="font-size:20px;font-weight:800;color:var(--text-dark);line-height:1.3;">Your website</div>
+            <div style="font-size:16px;color:var(--text-mid);margin-top:4px;line-height:1.4;">Building one, live, with AI</div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 2px 12px rgba(0,0,0,0.06);display:flex;align-items:flex-start;gap:14px;">
+          <div style="width:38px;height:38px;border-radius:10px;background:#ECFDF5;color:#00C2A0;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+          <div>
+            <div style="font-size:20px;font-weight:800;color:var(--text-dark);line-height:1.3;">Showing up online</div>
+            <div style="font-size:16px;color:var(--text-mid);margin-top:4px;line-height:1.4;">Social media and community pages</div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 2px 12px rgba(0,0,0,0.06);display:flex;align-items:flex-start;gap:14px;">
+          <div style="width:38px;height:38px;border-radius:10px;background:#F5F3FF;color:#7C3AED;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
+          <div>
+            <div style="font-size:20px;font-weight:800;color:var(--text-dark);line-height:1.3;">Where AI helps</div>
+            <div style="font-size:16px;color:var(--text-mid);margin-top:4px;line-height:1.4;">Building a quote, live, with AI</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:24px;font-size:19px;color:var(--text-dark);font-weight:600;">A practical session, not a theory session. Two live demos, three things to try this week.</div>
+    </div>
+  </div>`,
+  notes: `This slide is adapted from the DAP deck's agenda slide, but it needed real amendment rather than a straight copy. The DAP version has five items built around Daz and closes with a promise of a take-home guide, both of which are specific to the paid DAP toolkit and do not belong here. This version has four items matching what this session actually covers, and the closing line points to the two live demos and the three-item checklist instead, since that is what this audience actually walks away with. Worth double-checking the four labels here still match the deck if anything upstream changes again.`
+},
+
+// ── YOUR GOOGLE FRONT DOOR ──────────────────────────────────
+{
+  section: "Your Google front door",
+  title: "The single best five minutes",
+  html: `<div class="slide dark-navy" style="position:relative;overflow:hidden;background:radial-gradient(circle at 82% 20%,rgba(0,169,206,0.20),transparent 30%),linear-gradient(135deg,#14233F 0%,#1B2A4A 58%,#101B31 100%);">
+    <div class="slide-inner" style="padding:56px 76px;">
+      <div style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:36px;align-items:center;flex:1;">
+        <div>
+          <div class="section-badge">Your Google front door</div>
+          <h2 style="font-size:clamp(40px,5.4vw,58px);font-weight:900;color:#fff;line-height:1.1;">Your Google<br>Business Profile</h2>
+          <p style="font-size:24px;color:rgba(255,255,255,0.78);margin-top:22px;max-width:520px;line-height:1.55;">Free. And it is where most homeowners look first.</p>
+        </div>
+        <div style="display:flex;justify-content:center;">
+          <div style="width:100%;max-width:380px;background:#fff;border-radius:22px;box-shadow:0 20px 44px rgba(0,0,0,0.30);overflow:hidden;">
+            <div style="padding:14px 16px;background:#F8FAFC;border-bottom:1px solid #E5E7EB;">
+              <div style="background:#fff;border:1px solid #E5E7EB;border-radius:999px;padding:8px 14px;font-size:14px;color:#6B7280;">🔎 painter near me</div>
+            </div>
+            <div style="padding:18px;">
+              <div style="display:flex;gap:12px;align-items:flex-start;">
+                <div style="width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#00A9CE,#00C2A0);flex-shrink:0;"></div>
+                <div>
+                  <div style="font-size:16px;font-weight:900;color:#111827;">Your Painting Business</div>
+                  <div style="font-size:13px;color:#4B5563;margin-top:2px;">★★★★★ 4.9 &nbsp;·&nbsp; <span style="color:#047857;font-weight:800;">Verified</span></div>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;">
+                <div style="background:#F8FAFC;border:1px solid #E5E7EB;border-radius:9px;padding:8px;text-align:center;font-size:12px;font-weight:800;color:#111827;">Call</div>
+                <div style="background:#F8FAFC;border:1px solid #E5E7EB;border-radius:9px;padding:8px;text-align:center;font-size:12px;font-weight:800;color:#111827;">Directions</div>
+                <div style="background:#F8FAFC;border:1px solid #E5E7EB;border-radius:9px;padding:8px;text-align:center;font-size:12px;font-weight:800;color:#111827;">Photos</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`,
+  notes: `This is the highest leverage, lowest effort thing in the whole session. Keep the framing simple: a Google Business Profile is your shopfront, and most painters either do not have one set up properly or have never touched it since the day it was created. The mockup card is illustrative, adapted from the equivalent DAP slide, not a real business.`
+},
+
+{
+  section: "Your Google front door",
+  title: "What is Google Business Profile",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="padding:48px 70px;">
+      <div class="eyebrow">What is Google Business Profile</div>
+      <h2 style="font-size:clamp(28px,3.8vw,38px);font-weight:800;color:var(--text-dark);line-height:1.2;">This is the screen where<br>customers decide whether to call you.</h2>
+      <div style="display:grid;grid-template-columns:0.85fr 1.15fr;gap:32px;margin-top:20px;align-items:center;flex:1;min-height:0;">
+        <div>
+          <p style="font-size:19px;color:var(--text-mid);line-height:1.55;">It's your free listing on Google Search and Maps, showing your reviews, photos, and contact details right where homeowners are already looking.</p>
+          <div style="margin-top:22px;background:#FEF2F2;border-radius:14px;padding:16px 20px;">
+            <div style="font-size:18px;font-weight:700;color:#991B1B;line-height:1.5;">Many painters still have an incomplete or unclaimed profile. That's one of the easiest wins available.</div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E5E7EB;border-radius:20px;box-shadow:0 16px 40px rgba(17,24,39,0.14);overflow:hidden;">
+          <div style="padding:12px 16px;background:linear-gradient(180deg,#FAFBFD,#F6FAFC);border-bottom:1px solid #EDF2F7;">
+            <div style="background:#F3F4F6;border:1px solid #E5E7EB;border-radius:999px;padding:8px 14px;font-size:14px;color:#6B7280;">🔎 painter near me</div>
+          </div>
+          <div style="padding:18px;">
+            <div style="display:flex;gap:14px;align-items:flex-start;">
+              <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#00A9CE,#00C2A0);flex-shrink:0;"></div>
+              <div>
+                <div style="font-size:19px;font-weight:900;color:#111827;line-height:1.2;">Your Painting Business</div>
+                <div style="font-size:14px;color:#4B5563;margin-top:3px;">Painter &middot; Your town</div>
+                <div style="font-size:15px;font-weight:800;color:#111827;margin-top:6px;">★★★★★ 4.9 <span style="font-weight:600;color:#6B7280;">(62 reviews)</span> <span style="padding:3px 8px;border-radius:999px;background:#ECFDF5;font-size:12px;font-weight:800;color:#047857;">Verified</span></div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px;">
+              <div style="height:64px;border-radius:12px;background:linear-gradient(135deg,#D7EAF6,#F3F8FB);"></div>
+              <div style="height:64px;border-radius:12px;background:linear-gradient(135deg,#E6F7EC,#F8FCFA);"></div>
+              <div style="height:64px;border-radius:12px;background:linear-gradient(135deg,#F7EFD9,#FCFAF2);"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px;">
+              <div style="background:#F8FAFC;border:1px solid #E5E7EB;border-radius:10px;padding:10px;text-align:center;font-size:13px;font-weight:800;color:#111827;">Call</div>
+              <div style="background:#F8FAFC;border:1px solid #E5E7EB;border-radius:10px;padding:10px;text-align:center;font-size:13px;font-weight:800;color:#111827;">Directions</div>
+              <div style="background:#F8FAFC;border:1px solid #E5E7EB;border-radius:10px;padding:10px;text-align:center;font-size:13px;font-weight:800;color:#111827;">Message</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`,
+  notes: `The point of this slide is the screen itself, not a framework about it, so the mockup now takes up more than half the slide and sits large enough to actually read from the back of the room. The three photo blocks stand in for exterior, interior, and before/after shots, and the layout follows what a homeowner genuinely sees when they search, a name, a star rating, a verified badge, real photos, and one-tap buttons to call, get directions, or message. The step-by-step framing and the quick-fact chips from the previous version are gone, since they were competing with the screen for attention rather than supporting it.`
+},
+
+{
+  section: "Your Google front door",
+  title: "Reviews are word of mouth at scale",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="justify-content:center;padding:52px 80px;">
+      <div class="eyebrow">Reviews</div>
+      <h2 style="font-size:clamp(36px,4.8vw,50px);font-weight:800;color:var(--text-dark);line-height:1.2;">Reviews are word of mouth,<br>at scale.</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px;">
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-top:5px solid var(--dulux-red);">
+          <div style="font-size:clamp(38px,5vw,52px);font-weight:900;color:var(--dulux-red);line-height:1;">~68%</div>
+          <div style="font-size:19px;font-weight:700;color:var(--text-dark);margin-top:10px;line-height:1.4;">won't use a business rated under 4 stars</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-top:5px solid #2563EB;">
+          <div style="font-size:clamp(38px,5vw,52px);font-weight:900;color:#2563EB;line-height:1;">88% vs 47%</div>
+          <div style="font-size:19px;font-weight:700;color:var(--text-dark);margin-top:10px;line-height:1.4;">would use a business that replies to every review</div>
+        </div>
+      </div>
+      <div style="margin-top:24px;background:linear-gradient(135deg,#F0FDF4,#EFF6FF);border-radius:16px;padding:20px 24px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0F766E;">A message you can copy right now</div>
+        <div style="font-size:19px;color:#0F172A;line-height:1.6;margin-top:10px;">"Hi [Name], thanks for having us. Really happy with how it turned out. If you've got two minutes, a Google review makes a big difference for a small business like ours, here's the link: [link]"</div>
+      </div>
+    </div>
+  </div>`,
+  notes: `Adapted from DAP slide 8. Both stats trace to BrightLocal, the 68% figure from a 2026 dataset and the 88% versus 47% figure from 2024, and both are confirmed against the underlying research report, though as with any third-party statistic it's worth treating them as approximate rather than exact if quoted precisely to the room. Two things were deliberately left out of this version: the three-step "review request system" cards, since the very next slide in this deck already covers the practical timing of the ask, and anything referencing Daz or the Dulux Marketing Offsider guide, since that tool and guide are part of the paid DAP toolkit and not something this audience has access to. If useful as a spoken aside rather than slide content, the original DAP notes also mention NoCowboys.co.nz as a NZ-specific review platform worth claiming, at roughly NZD $49 plus GST a year.`
+},
+
+{
+  section: "Your Google front door",
+  title: "Getting reviews",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="justify-content:center;padding:70px 90px;">
+      <div class="eyebrow">Getting reviews without it being awkward</div>
+      <h2 style="font-size:clamp(36px,4.8vw,50px);font-weight:800;color:var(--text-dark);line-height:1.25;margin-top:6px;">Ask at the final walkthrough,<br>while the customer is happiest.</h2>
+      <div style="margin-top:32px;background:#fff;border-left:5px solid var(--dulux-sky);border-radius:10px;padding:22px 26px;max-width:680px;box-shadow:0 2px 14px rgba(0,0,0,0.06);">
+        <div style="font-size:24px;color:var(--text-dark);font-style:italic;line-height:1.6;">"Would you mind leaving us a quick Google review?"</div>
+      </div>
+      <p style="font-size:23px;color:var(--text-mid);margin-top:22px;">A text message follow-up works just as well.</p>
+    </div>
+  </div>`,
+  notes: `Acknowledge that asking for a review feels awkward for a lot of tradies. Give them the actual script rather than a vague suggestion. Keep this one tight, it does not need to run long.`
+},
+
+// ── YOUR WEBSITE ─────────────────────────────────────────────
+{
+  section: "Your website",
+  title: "Now let's talk about your website",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="padding:56px 80px;">
+      <div class="eyebrow">Your website</div>
+      <h2 style="font-size:clamp(36px,4.8vw,50px);font-weight:800;color:var(--text-dark);line-height:1.2;">Two paths to get there</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px;flex:1;">
+        <div style="background:#EFF6FF;border-radius:16px;padding:26px;">
+          <div style="font-size:23px;font-weight:800;color:#1D4ED8;">Squarespace &amp; Wix</div>
+          <div style="font-size:22px;color:var(--text-mid);margin-top:10px;line-height:1.55;">Template-based, proven, you do the building.</div>
+        </div>
+        <div style="background:#F0FDFB;border-radius:16px;padding:26px;">
+          <div style="font-size:23px;font-weight:800;color:#0F766E;">Lovable &amp; similar tools</div>
+          <div style="font-size:22px;color:var(--text-mid);margin-top:10px;line-height:1.55;">You describe what you want, the AI builds it.</div>
+        </div>
+      </div>
+      <div style="margin-top:22px;font-size:23px;color:var(--text-dark);font-weight:600;">Either way: fast to load, your number easy to find, works on a phone.</div>
+    </div>
+  </div>`,
+  notes: `Frame this as options rather than a recommendation of one over the others. A lot of this room will not have a website at all, so the first job is making the case that it is worth having one, even a simple one. Then introduce the two routes, the familiar drag-and-drop builders and the newer AI-native tools, which is where the demo is heading.`
+},
+
+{
+  section: "Your website",
+  title: "Live demo 1",
+  html: `<div class="slide dark-teal" style="position:relative;overflow:hidden;background:radial-gradient(circle at 85% 10%,rgba(0,169,206,0.20),transparent 30%),linear-gradient(135deg,#003D35 0%,#005A4F 48%,#1B2A4A 100%);">
+    <div class="slide-inner" style="justify-content:center;padding:64px 84px;">
+      <div class="demo-badge">Live demo</div>
+      <h2 style="font-size:clamp(40px,5.6vw,62px);font-weight:900;color:#fff;line-height:1.1;margin-top:18px;">Let's build one, live</h2>
+      <p style="font-size:26px;color:rgba(255,255,255,0.8);margin-top:20px;max-width:680px;line-height:1.55;">Building a simple painter's website with an AI tool, from a plain description.</p>
+    </div>
+  </div>`,
+  notes: `The first of two flagship demos. Suggested approach: bring a simple, realistic brief into the room, for example a two-page site for a residential painter in a named town, and build it live using Lovable or a comparable tool, showing how fast a workable draft appears from a plain description. Keep expectations honest, live software does not always behave perfectly in front of a room, so confirm wifi and login well ahead of time and have screenshots or a short recording ready as a backup. With a second demo later in the session, this one needs to stay disciplined on time, aim for eight to ten minutes rather than letting it stretch to fifteen.`
+},
+
+// ── SHOWING UP ONLINE ────────────────────────────────────────
+{
+  section: "Showing up online",
+  title: "Proof of work",
+  html: `<div class="slide dark-navy" style="position:relative;overflow:hidden;background:radial-gradient(circle at 84% 18%,rgba(96,165,250,0.22),transparent 28%),linear-gradient(135deg,#102B4A 0%,#1E3A5F 58%,#0E223C 100%);">
+    <div class="slide-inner" style="justify-content:center;padding:64px 84px;">
+      <div class="section-badge" style="background:#2563EB;">Showing up online</div>
+      <h2 style="font-size:clamp(40px,5.4vw,60px);font-weight:900;color:#fff;line-height:1.1;">Proof of work</h2>
+      <p style="font-size:23px;color:rgba(255,255,255,0.78);margin-top:22px;max-width:620px;line-height:1.55;">Your phone is a marketing machine. Every job is a piece of content, and every photo is evidence customers can trust you.</p>
+    </div>
+  </div>`,
+  notes: `Adapted from DAP's section intro for this topic. The core idea carries over cleanly since it isn't DAP-specific: your work is your marketing, and before/after photos need no marketing training at all to be effective.`
+},
+
+{
+  section: "Showing up online",
+  title: "Three photos, every single job",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="padding:50px 76px;">
+      <div class="eyebrow">The content habit</div>
+      <h2 style="font-size:clamp(34px,4.6vw,48px);font-weight:800;color:var(--text-dark);line-height:1.2;">Three photos.<br>Every single job.</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:24px;flex:1;">
+        <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+          <div style="position:relative;height:170px;background:#F3F4F6;">
+            <img src="images/bedroom-before.png" alt="Before photo of interior bedroom before painting" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <div style="position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;background:var(--dulux-red);color:#fff;font-size:13px;font-weight:800;">Before</div>
+          </div>
+          <div style="padding:14px;">
+            <div style="font-size:17px;font-weight:800;color:var(--text-dark);">Show the starting point</div>
+            <div style="font-size:15px;color:var(--text-mid);margin-top:4px;line-height:1.4;">Same angle you'll use for the after shot.</div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+          <div style="position:relative;height:170px;background:#F3F4F6;">
+            <img src="images/bedroom-painting-prep.png" alt="Prep photo of interior bedroom masked and prepared for painting" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <div style="position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;background:#F59E0B;color:#fff;font-size:13px;font-weight:800;">Prep</div>
+          </div>
+          <div style="padding:14px;">
+            <div style="font-size:17px;font-weight:800;color:var(--text-dark);">Show the professionalism</div>
+            <div style="font-size:15px;color:var(--text-mid);margin-top:4px;line-height:1.4;">Sanding, patching, and masking tell the quality story.</div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+          <div style="position:relative;height:170px;background:#F3F4F6;">
+            <img src="images/bedroom-after.png" alt="After photo of interior bedroom after painting" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <div style="position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;background:#16A34A;color:#fff;font-size:13px;font-weight:800;">After</div>
+          </div>
+          <div style="padding:14px;">
+            <div style="font-size:17px;font-weight:800;color:var(--text-dark);">Show the finished result</div>
+            <div style="font-size:15px;color:var(--text-mid);margin-top:4px;line-height:1.4;">Same angle, good light, no clutter, one strong shot.</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:20px;font-size:18px;color:var(--text-mid);">There are free apps that make this even easier, more on that shortly.</div>
+    </div>
+  </div>`,
+  notes: `This version now uses the actual before, prep, and after photos from the DAP deck rather than placeholder colour blocks, referencing the same image paths (images/bedroom-before.png, images/bedroom-painting-prep.png, images/bedroom-after.png) since Patrick has confirmed those are hosted and will resolve correctly here too. Captions have also been brought closer to DAP's original wording rather than the looser paraphrase used previously. The prep photo is worth emphasising verbally, since a nice after photo is easy to find anywhere, but showing the sanding, patching, or masking tells a story about quality that an after photo alone cannot. Approximately, research on social media imagery generally (not painting-specific) suggests before/after content substantially outperforms text-only posts, though the precise percentage varies by source, so it is worth treating any exact figure as indicative rather than quoting it as a hard fact.`
+},
+
+{
+  section: "Showing up online",
+  title: "A few things you can post",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="padding:50px 80px;">
+      <div class="eyebrow">What to post</div>
+      <h2 style="font-size:clamp(34px,4.6vw,48px);font-weight:800;color:var(--text-dark);line-height:1.2;">A few things you can post</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px;">
+        <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-top:4px solid #2563EB;">
+          <div style="font-size:19px;font-weight:800;color:var(--text-dark);">Before and after reveals</div>
+          <div style="font-size:16px;color:var(--text-mid);margin-top:6px;line-height:1.4;">Your strongest content. The transformation sells itself.</div>
+        </div>
+        <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-top:4px solid #F59E0B;">
+          <div style="font-size:19px;font-weight:800;color:var(--text-dark);">Process shots</div>
+          <div style="font-size:16px;color:var(--text-mid);margin-top:6px;line-height:1.4;">Sanding, masking, cutting in. Builds trust in your process.</div>
+        </div>
+        <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-top:4px solid #16A34A;">
+          <div style="font-size:19px;font-weight:800;color:var(--text-dark);">Crew and behind the scenes</div>
+          <div style="font-size:16px;color:var(--text-mid);margin-top:6px;line-height:1.4;">Team, van, tools. Adds personality to your business.</div>
+        </div>
+        <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-top:4px solid #7C3AED;">
+          <div style="font-size:19px;font-weight:800;color:var(--text-dark);">Colour and quick tips</div>
+          <div style="font-size:16px;color:var(--text-mid);margin-top:6px;line-height:1.4;">Explain a sheen, a prep step, or a tricky finish.</div>
+        </div>
+      </div>
+      <div style="margin-top:22px;background:#1B2A4A;border-radius:14px;padding:18px 22px;">
+        <div style="font-size:19px;font-weight:700;color:#fff;line-height:1.5;">One useful post a week beats ten posts and then silence.</div>
+      </div>
+    </div>
+  </div>`,
+  notes: `Adapted from DAP's "four content pillars" slide, but deliberately renamed and restructured rather than copied. The original is built around a named framework with a Daz prompt attached to it, both specific to the paid DAP toolkit, so this version keeps the four content ideas themselves, which are generally useful and not proprietary, while dropping the pillar branding, the Daz prompt box, and the four-week content calendar that came with it in the original. Facebook remains the primary platform to mention for this audience, per the underlying research, with Instagram worth adding once Facebook feels routine.`
+},
+
+{
+  section: "Showing up online",
+  title: "What good looks like",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="justify-content:center;padding:56px 84px;">
+      <div class="eyebrow">What good looks like</div>
+      <h2 style="font-size:clamp(34px,4.6vw,48px);font-weight:800;color:var(--text-dark);line-height:1.2;">Worth a look:<br>@basecoatnz</h2>
+      <p style="font-size:20px;color:var(--text-mid);margin-top:20px;max-width:680px;line-height:1.55;">Real before/after transformations and process shots, exactly the content style we've just covered.</p>
+      <a href="https://www.instagram.com/basecoatnz/" style="display:inline-block;margin-top:18px;width:fit-content;font-size:18px;font-weight:700;color:#fff;background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF,#515BD4);padding:10px 20px;border-radius:10px;text-decoration:none;">instagram.com/basecoatnz</a>
+      <div style="margin-top:24px;background:#FEF2F2;border-radius:14px;padding:18px 22px;">
+        <div style="font-size:19px;font-weight:700;color:#991B1B;line-height:1.5;">One catch: they don't post often. Great content still needs to show up regularly to actually work for you.</div>
+      </div>
+    </div>
+  </div>`,
+  notes: `This account is Patrick's own pick, not something independently verified, Instagram itself blocks automated access so the description here relies entirely on his read of the account rather than anything checked externally. The framing deliberately turns the infrequent posting into a teaching point rather than glossing over it, tying directly back to the "one post a week beats ten and then silence" line on the previous slide. Worth deciding closer to the day whether to pull up the actual account live on screen instead of just the link, if wifi and time allow.`
+},
+
+{
+  section: "Showing up online",
+  title: "Free tools that make your photos look better",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="justify-content:center;padding:56px 84px;">
+      <div class="eyebrow">Quick reference</div>
+      <h2 style="font-size:clamp(34px,4.6vw,48px);font-weight:800;color:var(--text-dark);line-height:1.2;">Three free tools worth knowing</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:30px;">
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-top:5px solid #2563EB;">
+          <div style="font-size:21px;font-weight:900;color:var(--text-dark);">Canva</div>
+          <div style="font-size:16px;color:var(--text-mid);margin-top:10px;line-height:1.5;">Add your logo and business name to a photo, or build a simple before/after layout.</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-top:5px solid #16A34A;">
+          <div style="font-size:21px;font-weight:900;color:var(--text-dark);">Snapseed</div>
+          <div style="font-size:16px;color:var(--text-mid);margin-top:10px;line-height:1.5;">Quick fixes on your phone, brightness, straightening, cropping, before you post.</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-top:5px solid #7C3AED;">
+          <div style="font-size:21px;font-weight:900;color:var(--text-dark);">CapCut</div>
+          <div style="font-size:16px;color:var(--text-mid);margin-top:10px;line-height:1.5;">Turn a before and after photo pair into a short video.</div>
+        </div>
+      </div>
+      <div style="margin-top:26px;font-size:19px;color:var(--text-dark);font-weight:600;">None of these need any design experience. Five minutes, and the photo looks twice as good.</div>
+    </div>
+  </div>`,
+  notes: `Kept deliberately light, one line per tool, no feature walkthrough. All three are free (or have a free tier), mobile-friendly, and require no design background, which is worth saying explicitly since this audience may assume otherwise. If time is short, this is a slide that could be skipped and just mentioned verbally, since the names alone are the useful part.`
+},
+
+{
+  section: "Showing up online",
+  title: "Keep an eye on local community pages",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="justify-content:center;padding:70px 90px;">
+      <div class="eyebrow">Community pages</div>
+      <h2 style="font-size:clamp(36px,4.8vw,50px);font-weight:800;color:var(--text-dark);line-height:1.25;">"Does anyone know<br>a good painter?"</h2>
+      <p style="font-size:25px;color:var(--text-mid);margin-top:24px;max-width:680px;line-height:1.6;">Join two or three local Facebook or community groups. Reply quickly and helpfully.</p>
+      <div style="margin-top:22px;display:inline-flex;align-items:center;gap:12px;background:#FFFBEB;border-radius:12px;padding:14px 20px;">
+        <span style="font-size:26px;">⚠️</span>
+        <span style="font-size:22px;font-weight:700;color:#92400E;">Keep prices out of public comments, move it to a message.</span>
+      </div>
+    </div>
+  </div>`,
+  notes: `Keep this one brisk given the time pressure elsewhere in the session. The core idea: these groups exist, homeowners use them to find tradespeople, and most painters never think to join them. One line is enough on reading group rules before posting, since some ban business promotion outright.`
+},
+
+// ── WHERE AI HELPS ───────────────────────────────────────────
+{
+  section: "Where AI helps",
+  title: "Quoting eats your evenings",
+  html: `<div class="slide dark-navy" style="position:relative;overflow:hidden;background:radial-gradient(circle at 80% 15%,rgba(0,169,206,0.20),transparent 30%),linear-gradient(135deg,#14233F 0%,#1B2A4A 58%,#101B31 100%);">
+    <div class="slide-inner" style="justify-content:center;padding:70px 90px;">
+      <div class="eyebrow" style="color:#9BE7F0;">Where AI helps</div>
+      <h2 style="font-size:clamp(40px,5.4vw,60px);font-weight:900;color:#fff;line-height:1.15;">Quoting eats<br>your evenings</h2>
+      <p style="font-size:26px;color:rgba(255,255,255,0.78);margin-top:24px;max-width:640px;line-height:1.55;">AI can turn rough site visit notes into a clean, professional quote in minutes.</p>
+    </div>
+  </div>`,
+  notes: `Short reframe before the second demo, no more than a minute or two. The goal is to name the pain point everyone in the room recognises, an evening spent writing up a quote instead of with family, before showing the fix.`
+},
+
+{
+  section: "Where AI helps",
+  title: "Live demo 2",
+  html: `<div class="slide dark-teal" style="position:relative;overflow:hidden;background:radial-gradient(circle at 85% 10%,rgba(0,169,206,0.20),transparent 30%),linear-gradient(135deg,#003D35 0%,#005A4F 48%,#1B2A4A 100%);">
+    <div class="slide-inner" style="justify-content:center;padding:64px 84px;">
+      <div class="demo-badge">Live demo</div>
+      <h2 style="font-size:clamp(40px,5.6vw,62px);font-weight:900;color:#fff;line-height:1.1;margin-top:18px;">Let's put a quote<br>together, live</h2>
+      <p style="font-size:26px;color:rgba(255,255,255,0.8);margin-top:20px;max-width:680px;line-height:1.55;">Turning rough job notes into a professional quote, using AI.</p>
+    </div>
+  </div>`,
+  notes: `The second flagship demo. Bring realistic rough notes into the room, something like "three bedroom interior repaint, minor filling needed, two coats, ceilings included," and have an AI tool turn that into a clean, professional-looking quote structure live. This works with a general-purpose AI assistant, it does not need to be tied to any specific product. As with the website demo, confirm the tool and login beforehand and have a backup screenshot or short recording in case live software misbehaves in front of the room. Given this is the second demo in the session, keep a close eye on the clock, this slot has less room to run long than the first one did.`
+},
+
+{
+  section: "Where AI helps",
+  title: "You can't answer the phone from a ladder",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="justify-content:center;padding:56px 84px;">
+      <div class="eyebrow">Where AI helps</div>
+      <h2 style="font-size:clamp(34px,4.6vw,48px);font-weight:800;color:var(--text-dark);line-height:1.2;">You can't answer the phone<br>from a ladder.</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px;">
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-top:5px solid #2563EB;">
+          <div style="font-size:clamp(32px,4.4vw,44px);font-weight:900;color:#2563EB;line-height:1;">42 hrs / 23%</div>
+          <div style="font-size:17px;font-weight:700;color:var(--text-dark);margin-top:10px;line-height:1.4;">average time businesses take to respond to a lead, and the share who never respond at all</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-top:5px solid var(--dulux-red);">
+          <div style="font-size:clamp(32px,4.4vw,44px);font-weight:900;color:var(--dulux-red);line-height:1;">~30-35% / ~85%</div>
+          <div style="font-size:17px;font-weight:700;color:var(--text-dark);margin-top:10px;line-height:1.4;">of inbound trade calls estimated to go unanswered, and the share of callers who don't try again</div>
+        </div>
+      </div>
+      <div style="margin-top:24px;background:#1B2A4A;border-radius:16px;padding:22px 26px;">
+        <div style="font-size:21px;font-weight:700;color:#fff;line-height:1.5;">Miss one job's worth of calls a month. At $5,000 a job, that's $60,000 walked out the door every year.</div>
+      </div>
+    </div>
+  </div>`,
+  notes: `Two different tiers of evidence on this slide, worth keeping straight when presenting. The 42 hours and 23% figure is independently sourced, Harvard Business Review, cited in the underlying research report as the average lead response time across industries and the share of businesses that never respond to a lead at all, and it isn't about AIvolve or call agents specifically, just business responsiveness generally. The 30 to 35% missed-call figure and the 85% no-retry figure come from AIvolve's own business plan and pitch materials rather than an independently named study, so they're presented here as industry estimates rather than with the same confidence as the HBR figure. Worth being upfront about that distinction if asked, especially since the next slide names AIvolve directly. The $60,000 figure is Patrick's own chosen framing, not a researched number: one missed job's worth of enquiries a month, at an assumed $5,000 average job value, times twelve months. Deliberately a single clean assumption rather than a chain of stacked ones (call volume, miss rate, and conversion rate multiplied together), since that would be harder to defend if someone in the room asked where the number came from.`
+},
+
+{
+  section: "Where AI helps",
+  title: "Tools that exist in this space",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="justify-content:center;padding:70px 90px;">
+      <div class="eyebrow">One more thing worth knowing</div>
+      <h2 style="font-size:clamp(34px,4.6vw,48px);font-weight:800;color:var(--text-dark);line-height:1.3;max-width:760px;">Tools like AIvolve exist to help painting businesses answer calls and capture leads using AI.</h2>
+      <p style="font-size:23px;color:var(--text-mid);margin-top:24px;">One example among a growing category, not the only answer.</p>
+    </div>
+  </div>`,
+  notes: `Single brief mention, in keeping with what was agreed with Noemi. This is not the moment for a sales pitch and should not compete with or resemble the DAP toolkit content. Frame it as one example among several in a growing category, not as the answer.`
+},
+
+// ── WRAP UP ──────────────────────────────────────────────────
+{
+  section: "Wrap up",
+  title: "Three things to do this week",
+  html: `<div class="slide light">
+    <div class="slide-inner" style="justify-content:center;padding:70px 90px;">
+      <div class="eyebrow">This week</div>
+      <h2 style="font-size:clamp(36px,4.8vw,50px);font-weight:800;color:var(--text-dark);margin-bottom:10px;">Three things to do this week</h2>
+      <div style="display:flex;flex-direction:column;gap:18px;margin-top:20px;">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--dulux-sky);color:#fff;font-weight:900;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+          <div style="font-size:26px;color:var(--text-dark);">Claim or check your Google Business Profile</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--dulux-red);color:#fff;font-weight:900;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+          <div style="font-size:26px;color:var(--text-dark);">Ask your next customer for a review</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--aivolve-teal);color:#fff;font-weight:900;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+          <div style="font-size:26px;color:var(--text-dark);">Try an AI tool on a real quote or a rough website draft</div>
+        </div>
+      </div>
+    </div>
+  </div>`,
+  notes: `Keep it to three. More than that and nobody does any of them. This version leans on the two demos just shown, since that is what will be freshest in people's minds walking out the door.`
+},
+
+{
+  section: "Wrap up",
+  title: "Thank you and questions",
+  html: `<div class="slide dark-navy" style="position:relative;overflow:hidden;background:radial-gradient(circle at 80% 15%,rgba(0,169,206,0.20),transparent 32%),linear-gradient(135deg,#14233F 0%,#1B2A4A 60%,#101B31 100%);">
+    <div class="slide-inner" style="justify-content:center;align-items:flex-start;padding:70px 90px;">
+      <h1 style="font-size:clamp(52px,6.8vw,82px);font-weight:900;color:#fff;line-height:1.1;">Thank you.<br>Questions?</h1>
+      <div style="margin-top:40px;">
+        <div style="font-size:24px;font-weight:800;color:#fff;">Patrick Dodd</div>
+        <div style="font-size:19px;color:rgba(255,255,255,0.65);margin-top:4px;">patrickdodd@aivolve.co.nz</div>
+      </div>
+    </div>
+  </div>`,
+  notes: `If either demo has run long, this is the slot that absorbs it. Aim for genuine time here regardless, but go in knowing it may be shorter than five minutes on the day.`
+}
+
+];
+
+// ═══════════════════════════════════════════════════════════
+// SLIDE RENDERER
+// ═══════════════════════════════════════════════════════════
+
+const SLIDE_CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dulux-navy: #1B2A4A;
+    --dulux-red: #C8102E;
+    --dulux-sky: #00A9CE;
+    --aivolve-teal: #00C2A0;
+    --white: #FFFFFF;
+    --text-dark: #111827;
+    --text-mid: #374151;
+  }
+  html, body { width:100%; height:100%; overflow:hidden; }
+  body {
+    font-family:'Inter',sans-serif;
+    background:#fff;
+    width: 1100px;
+    height: 620px;
+    transform-origin: top left;
+    overflow: hidden;
+  }
+  .slide { width:100%; height:100%; position:relative; overflow:hidden; display:flex; flex-direction:column; }
+  .slide.light { background:#F7F8FA; }
+  .slide.dark-navy { background:var(--dulux-navy); }
+  .slide.dark-teal { background:linear-gradient(135deg,#003D35,#005A4F); }
+
+  .slide-inner { flex:1; display:flex; flex-direction:column; min-height:0; }
+
+  .eyebrow {
+    font-size:17px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--dulux-sky); margin-bottom:10px;
+  }
+
+  .section-badge {
+    display:inline-block; font-size:17px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+    padding:6px 16px; border-radius:6px; color:#fff; margin-bottom:20px;
+    background:var(--dulux-sky); width:fit-content;
+  }
+
+  .demo-badge {
+    display:inline-block; background:var(--aivolve-teal); color:#fff; font-size:17px; font-weight:800;
+    letter-spacing:.08em; text-transform:uppercase; padding:6px 16px; border-radius:6px; width:fit-content;
+  }
+`;
+
+function buildSlideHTML(slide) {
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${SLIDE_CSS}</style></head><body>${slide.html}<script>
+  (function() {
+    var DESIGN_W = 1100, DESIGN_H = 620;
+    function scale() {
+      var s = Math.min(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H);
+      document.body.style.transform = 'scale(' + s + ')';
+      document.body.style.width = DESIGN_W + 'px';
+      document.body.style.height = DESIGN_H + 'px';
+    }
+    scale();
+    window.addEventListener('resize', scale);
+  })();
+<\/script></body></html>`;
+}
+
+let currentSlide = 0;
+const total = SLIDES.length;
+
+function buildTOC() {
+  const container = document.getElementById('toc-list');
+  const sections = {};
+  SLIDES.forEach((s, i) => {
+    if (!sections[s.section]) sections[s.section] = [];
+    sections[s.section].push({ title: s.title, index: i });
+  });
+  let html = '';
+  for (const [section, items] of Object.entries(sections)) {
+    html += `<div class="toc-section"><div class="toc-section-label">${section}</div>`;
+    items.forEach(item => {
+      html += `<button class="toc-item" id="toc-${item.index}" onclick="goToSlide(${item.index})">${item.title}</button>`;
+    });
+    html += '</div>';
+  }
+  container.innerHTML = html;
+}
+
+function updateTOCActive() {
+  document.querySelectorAll('.toc-item').forEach(el => el.classList.remove('active'));
+  const active = document.getElementById(`toc-${currentSlide}`);
+  if (active) active.classList.add('active');
+}
+
+function renderSlide(index) {
+  const slide = SLIDES[index];
+  const frame = document.getElementById('slide-frame');
+  frame.srcdoc = buildSlideHTML(slide);
+  document.getElementById('notes-content').innerHTML = slide.notes.replace(/\n/g, '<br>');
+  document.getElementById('slide-counter').textContent = `${index + 1} / ${total}`;
+  document.getElementById('btn-prev').disabled = index === 0;
+  document.getElementById('btn-next').disabled = index === total - 1;
+  updateTOCActive();
+}
+
+function nextSlide() { if (currentSlide < total - 1) { currentSlide++; renderSlide(currentSlide); } }
+function prevSlide() { if (currentSlide > 0) { currentSlide--; renderSlide(currentSlide); } }
+function goToSlide(index) { currentSlide = index; renderSlide(currentSlide); toggleTOC(); }
+
+function toggleNotes() {
+  const panel = document.getElementById('notes-panel');
+  const btn = document.getElementById('notes-toggle-btn');
+  panel.classList.toggle('visible');
+  btn.classList.toggle('active');
+  btn.textContent = panel.classList.contains('visible') ? '📋 Hide Notes' : '📋 Speaker Notes';
+}
+
+function toggleTOC() {
+  const overlay = document.getElementById('toc-overlay');
+  overlay.classList.toggle('open');
+  if (overlay.classList.contains('open')) updateTOCActive();
+}
+function closeTOCOutside(e) {
+  if (e.target === document.getElementById('toc-overlay')) toggleTOC();
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+  if (e.key === 'Escape') {
+    const overlay = document.getElementById('toc-overlay');
+    if (overlay.classList.contains('open')) overlay.classList.remove('open');
+  }
+});
+
+buildTOC();
+renderSlide(0);
+</script>
+</body>
+</html>
